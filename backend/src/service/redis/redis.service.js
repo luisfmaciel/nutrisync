@@ -1,4 +1,4 @@
-import redisAdapter from '../adapter/redis.adapter.js';
+import redisAdapter from '../../adapter/redis.adapter.js';
 
 class RedisService {
     constructor() {

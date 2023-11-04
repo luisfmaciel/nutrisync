@@ -68,7 +68,7 @@ class RedisAdapter {
     async hset(hash, key, value) {
         try {
             this.createClient();
-            if (value instanceof Object) value = JSON.parse(response);
+            if (value instanceof Object) value = JSON.stringify(value);
             console.log('Key set in hash')
             return await this._client.hset(hash, key, value)
         } catch (error) {
