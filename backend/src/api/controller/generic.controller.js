@@ -1,8 +1,10 @@
 import moment from 'moment';
+import redisService from '../../service/redis/redis.service.js';
 
 class GenericController {
     constructor() {
         this._moment = moment
+        this._redisService = redisService;
     }
 
     sendSuccessResponse(res, message, data, next = false) {;

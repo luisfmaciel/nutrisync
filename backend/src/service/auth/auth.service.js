@@ -15,7 +15,7 @@ class AuthService extends GenericService {
 
     async login(user) {
         try {
-            const token = this._jwt.sign({ datetime: new Date() }, process.env.JWT_SECRET, jwtParams);
+            const token = this._jwt.sign({ datetime: new Date(), auth: true, user }, process.env.JWT_SECRET, jwtParams);
             await this._redisService.hset(AUTHENTICATION_SESSIONS, token, user);
             const expirationAt = this._moment().utc().endOf('day').unix();
             await this._redisService.expirationAt(AUTHENTICATION_SESSIONS, expirationAt);

@@ -21,6 +21,14 @@ class RedisService {
             console.log(error);
         }
     }
+    
+    async hdel(hash, key) {
+        try {
+            return await this._redisAdapter.hdel(hash, key);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     async set(key, value, expiration = 0) {
         try {

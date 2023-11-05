@@ -2,13 +2,13 @@ import jwt from 'jsonwebtoken';
 
 class JwtMiddleware {
     constructor() {
-        this._secret = process.env.JWT.SECRET;
-        this._jwt = jwt; 
+        this._jwt = jwt;
+        this.checkRequestToken = this.checkRequestToken.bind(this);
     }
 
     async checkRequestToken(req, res, next) {
         try {
-            const token = this.getTokenFromHeader(req);
+            const token = await this.getTokenFromHeader(req);
     
             const decoded = await this.verifyJWT(token);
             req.token = decoded;
@@ -19,21 +19,27 @@ class JwtMiddleware {
     }
 
     async verifyJWT(token) {
+        let decodedToken;
         try {
-            this._jwt.verify(token, this._secret, (err, decoded) => {
+            this._jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
                 if(err) return err;
-                return decoded;
+                decodedToken = decoded;
             });
+            return decodedToken;
         } catch (error) {
             console.log(error);
             throw error;
         }
     }
 
-    getTokenFromHeader(req) {
+    async getTokenFromHeader(req) {
         const token = req.headers.authorization;
         console.log(`Token: ${token}`);
         return token;
+    }
+
+    initialize() {
+        return this.checkRequestToken;
     }
 }
 

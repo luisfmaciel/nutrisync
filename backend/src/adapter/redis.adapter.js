@@ -87,15 +87,16 @@ class RedisAdapter {
         }
     }
    
-    // async hdel(hash, key) {
-    //     try {
-    //         this.createClient();
-    //         console.log('Key deleted from hash')
-    //         return await this._client.hdel(hash, key)
-    //     } catch (error) {
-    //         throw error;
-    //     }
-    // }
+    async hdel(hash, key) {
+        try {
+            this.createClient();
+            console.log('Key deleted from hash')
+            await this._client.hdel(hash, key)
+            return { hash, key, success: true }
+        } catch (error) {
+            throw error;
+        }
+    }
     
     async expirationAt(key, milliseconds) {
         try {
