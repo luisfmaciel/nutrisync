@@ -10,7 +10,7 @@ class UserController extends GenericController {
 
     async findUserByEmail(email) {
         try {
-            return await this._userSevice.findUserByEmail(email);
+            return await this._userSevice.findUserByEmailWithPassword(email);
         } catch (error) {
             throw error;
         }

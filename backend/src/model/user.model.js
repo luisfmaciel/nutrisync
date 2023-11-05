@@ -22,7 +22,8 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    require: true
+    require: true,
+    select:false
   }
 }, { timestamps: true });
 
@@ -35,6 +36,9 @@ userSchema.pre('save', function(next) {
     next();
   });
 });
+userSchema.methods.checkPassword = function(password) {
+  return bcrypt.compareSync(password, this.password);
+}
 
 const Users = mongoose.model('Users', userSchema);
 

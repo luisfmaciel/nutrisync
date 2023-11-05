@@ -22,11 +22,11 @@ class LoginController extends GenericController {
         try {
             const email = getAttributeValue(req, 'body.email');
             const password = getAttributeValue(req, 'body.password', '');
-            const user = await this._userController.findUserByEmail(email);
+            const user = await this._userController.findUserByEmailWithPassword(email);
             
             if (!user) throw this._constants.USER_NOT_FOUND;
             
-            const passwordMatch = this.compareSync(password, user.password);
+            const passwordMatch = await user.checkPassword(password);       
         
             if (!passwordMatch) throw this._constants.MISMATCHED_PASSWORDS;
             

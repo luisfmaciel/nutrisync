@@ -5,13 +5,15 @@ import jwtMiddleware from "../../middleware/jwt.middleware.js";
 
 const router = Router({ mergeParams: true });
 
-router.post('/signin', (req, res, next) => loginController.login(req, res, next));
+router.post('/', (req, res, next) => loginController.login(req, res, next));
 
-router.get('/signin/access', jwtMiddleware.checkRequestToken, (req, res, next) => {
+router.get('/access', jwtMiddleware.checkRequestToken, (req, res, next) => {
     if (!req.token) res.status(401).json({ message: 'User not authorized', auth: false });
     else res.status(200).json(req.token.user)
 });
 
 router.post('/create', (req, res, next) => userController.createUser(req, res, next));
+
+router.post('/logout', (req, res, next) => loginController.logout(req, res, next));
 
 export default router;
