@@ -17,18 +17,20 @@ class LoginController extends GenericController {
         this.compareSync = pkg.compareSync;
     }
 
-    async login(req, res, next) {
+    async login(req, res) {
         const data = {};
         try {
-            const email = getAttributeValue(req, 'body.email');
+            const email = getAttributeValue(req, 'body.email');            
             const password = getAttributeValue(req, 'body.password', '');
-            const user = await this._userController.findUserByEmailWithPassword(email);
-            
+
+            let user = await this._userController.findUserByEmailWithPassword(email);
             if (!user) throw this._constants.USER_NOT_FOUND;
             
             const passwordMatch = await user.checkPassword(password);       
-        
             if (!passwordMatch) throw this._constants.MISMATCHED_PASSWORDS;
+       
+            user = getAttributeValue(user, '_doc', user);
+            delete user.password;
             
             const token = await this._authService.login(user);      
             data.token = token;
