@@ -10,7 +10,7 @@ class RedisService {
             await this._redisAdapter.hset(hash, key, value);
             return true;
         } catch (error) {
-            console.log(error);
+            throw error;
         }
     }
 
@@ -18,7 +18,7 @@ class RedisService {
         try {
             return await this._redisAdapter.hget(hash, key);
         } catch (error) {
-            console.log(error);
+            throw error;
         }
     }
     
@@ -26,7 +26,7 @@ class RedisService {
         try {
             return await this._redisAdapter.hdel(hash, key);
         } catch (error) {
-            console.log(error);
+            throw error;
         }
     }
 
@@ -35,7 +35,7 @@ class RedisService {
             await this._redisAdapter.set(key, value, expiration);
             return true;
         } catch (error) {
-            console.log(error);
+            throw error;
         }
     }
   
@@ -43,7 +43,7 @@ class RedisService {
         try {
             return await this._redisAdapter.get(key);
         } catch (error) {
-            console.log(error);
+            throw error;
         }
     }
 
@@ -52,7 +52,7 @@ class RedisService {
             await this._redisAdapter.expirationAt(key, milliseconds);
             return true;
         } catch (error) {
-            consolse.log(error);
+            throw error;
         }
     }
 }

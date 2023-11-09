@@ -11,7 +11,6 @@ class LoginController extends GenericController {
     constructor() {
         super();
         this._authService = authService;
-        
         this._userController = userController;
         this._constants = constants;
         this.compareSync = pkg.compareSync;
