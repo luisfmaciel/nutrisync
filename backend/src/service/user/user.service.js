@@ -7,7 +7,7 @@ class UserService extends GenericService {
         this._userModel  = userModel;
     }
 
-    async findUserByEmailWithPassword(email) {
+    async findUserByEmail(email) {
         try {
             return await this._userModel.findOne({ email }).select("+password");
         } catch (error) {
