@@ -29,9 +29,11 @@ class OpenaiAdapter {
             const response = await this._openai.completions.create({
                 model: 'text-davinci-003',
                 prompt,
+                max_tokens: 2048,
                 temperature: 1
             });
             console.log('RESPONSE', response)
+            return response;
         } catch(error) {
             console.log(error)
             throw error;
