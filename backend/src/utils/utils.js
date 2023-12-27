@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 
-export function getAttributeValue(object, path, defaultValue = undefined) {
+function getAttributeValue(object, path, defaultValue = undefined) {
     try {
         const prop = getDescendantProp(object, path);
         if (!prop) return defaultValue;
@@ -16,12 +16,12 @@ function getDescendantProp(object, path) {
     return object;
 }
 
-export async function generateHash(value) {
+async function generateHash(value) {
     return await bcrypt.hash(value, 10);
 }
 
 // example@example.com
-export function validateEmail(email) {
+function validateEmail(email) {
     const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return regexEmail.test(email);
 }
@@ -30,7 +30,15 @@ export function validateEmail(email) {
 // Pelo menos uma letra maiúscula
 // Pelo menos um número
 // Pelo menos 6 caracteres no total
-export function validadePassword(password) {
+function validadePassword(password) {
     const regexSenha = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
     return regexSenha.test(password);
 }
+
+export default {
+    getAttributeValue,
+    getDescendantProp,
+    generateHash,
+    validateEmail,
+    validadePassword
+};
