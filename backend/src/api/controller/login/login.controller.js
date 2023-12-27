@@ -19,27 +19,27 @@ class LoginController extends GenericController {
     async login(req, res) {
         const data = {};
         try {
-            const email = getAttributeValue(req, 'body.email');            
+            const email = getAttributeValue(req, 'body.email');
             const password = getAttributeValue(req, 'body.password', '');
 
             let user = await this._userController.findUserByEmailWithPassword(email);
             if (!user) throw this._constants.USER_NOT_FOUND;
-            
-            const passwordMatch = await user.checkPassword(password);       
+
+            const passwordMatch = await user.checkPassword(password);
             if (!passwordMatch) throw this._constants.MISMATCHED_PASSWORDS;
-       
+
             user = getAttributeValue(user, '_doc', user);
             delete user.password;
-            
-            const token = await this._authService.login(user);      
+
+            const token = await this._authService.login(user);
             data.token = token;
-            
+
             this.sendSuccessResponse(res, this._constants.USER_SUCCESSFULLY_AUTHENTICATED, data);
         } catch (error) {
             this.sendErrorResponse(res, error, data);
         }
     }
-    
+
     async logout(req, res, next) {
         try {
             const token = getAttributeValue(req, 'headers.authorization');
