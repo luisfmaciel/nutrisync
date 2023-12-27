@@ -10,7 +10,7 @@ class OpenaiService extends GenericService {
 
     async runPrompt(prompt) {
         try {
-            await this._openaiAdapter.runPrompt(prompt);
+            return await this._openaiAdapter.runPrompt(prompt);
         } catch (error) {
             throw error;
         }
