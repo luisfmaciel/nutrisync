@@ -9,7 +9,7 @@ config();
 
 const app = express();
 
-connectionAdapter.connect();
+if(process.env.NODE_ENV === 'DEV') connectionAdapter.connect();
 app.use(express.json());
 app.use(cors());
 app.use(jwtMiddleware.initialize())
