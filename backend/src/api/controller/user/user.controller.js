@@ -10,9 +10,9 @@ class UserController extends GenericController {
         this._constants = constants;
     }
 
-    async findUserByEmailWithPassword(email) {
+    async findUserByEmail(email) {
         try {
-            return await this._userSevice.findUserByEmailWithPassword(email);
+            return await this._userSevice.findUserByEmail(email);
         } catch (error) {
             throw error;
         }
