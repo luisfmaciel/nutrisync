@@ -1,15 +1,16 @@
 import TestBase from '../../test.base.js';
 import userService from '../../../src/service/user/user.service.js';
+import { tags } from '../../../src/utils/constants.js';
 
 class UserService extends TestBase {
     constructor() {
-        super(userService);
+        super(userService, tags.TAG_SERVICE);
     }
 
     test() {
         beforeEach(() => {
-            this._controller = this.sinonMock(this.controller);
-            this._userModel = this.sinonMock(this.controller._userModel);
+            this._service = this.sinonMock(this.service);
+            this._userModel = this.sinonMock(this.service._userModel);
         });
 
         describe("method findUserByEmail", () => {
@@ -23,7 +24,7 @@ class UserService extends TestBase {
                     }
                 });
 
-                const result = await this.controller.findUserByEmail(email);
+                const result = await this.service.findUserByEmail(email);
 
                 this.assert.deepEqual(result, userMock);
             });
@@ -34,7 +35,7 @@ class UserService extends TestBase {
                 this._userModel.expects('findOne').throws(new Error("Database error"));
                 
                 try {
-                    await this.controller.findUserByEmail(email);
+                    await this.service.findUserByEmail(email);
                 } catch (error) {
                     this.assert.deepEqual(error.message, "Database error");
                 }
@@ -50,7 +51,7 @@ class UserService extends TestBase {
                 
                 this._userModel.expects('create').resolves(userMock);
                 
-                const result = await this.controller.createUser(userMock);
+                const result = await this.service.createUser(userMock);
                 
                 this.assert.deepEqual(result, userMock);
             });
@@ -64,7 +65,7 @@ class UserService extends TestBase {
                 this._userModel.expects('create').throws(new Error("Database error"));
                 
                 try {
-                    await this.controller.createUser(userMock);
+                    await this.service.createUser(userMock);
                 } catch (error) {
                     this.assert.deepEqual(error.message, "Database error");
                 }
