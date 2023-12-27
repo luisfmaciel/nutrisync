@@ -1,11 +1,12 @@
 import { stub, spy, mock, createSandbox, createStubInstance } from "sinon";
 import { should, use, expect, assert } from "chai";
+import { tags } from "../src/utils/constants.js";
 import chaiAsPromised from 'chai-as-promised';
 use(chaiAsPromised);
 should();
 
 class TestBase {
-    constructor(path, isModel) {
+    constructor(path, tag) {
         this.stub = stub;
         this.spy = spy;
         this.sinonMock = mock;
@@ -13,8 +14,10 @@ class TestBase {
         this.assert = assert;
         this.createStubInstance = createStubInstance;
         this.restoreMethods = [];
-        if(isModel) this.model = path;
-        else this.controller = path;
+        if(tag === tags.TAG_MODEL) this.model = path;
+        else if (tag === tags.TAG_CONTROLLER) this.controller = path;
+        else if (tag === tags.TAG_SERVICE) this.service = path;
+        else this.utils = path;
         this.sandbox = createSandbox({
             injectInto: null,
             properties: ['spy', 'stub', 'mock', 'server', 'clock', 'requests'],
@@ -31,7 +34,7 @@ class TestBase {
             code: 200,
             data: {}
         };
-        this.initialize(path, isModel);
+        this.initialize();
     }
 
     initialize() {
@@ -80,31 +83,17 @@ class TestBase {
         }
     }
 
-    async importPath(path, isModel) {
-        try {
-            let importedPath;
-            if(isModel) importedPath = await import(path);
-            else importedPath = await import(path);
-            
-            return importedPath;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    restore() {
-        this.restoreMethods.forEach(method => {
-            if(method.restore) method.restore();
-        });
-    }
-
     test() {}
 
     run() {
-        const describeName = this.controller ? this.controller.constructor.name : `${this.model.modelName} ${this.model.name}`;
+        let describeName;
+        if (this.controller) describeName = this.controller.constructor.name;
+        else if(this.service) describeName = this.service.constructor.name;
+        else if(this.model) describeName = this.model.name;
+        else describeName = tags.TAG_UTILS;
 
         describe(describeName, () => {
-            if(this.controller) {
+            if(this.controller || this.service || this.utils) {
                 beforeEach(() => {
                     this.stub = this.sandbox.stub.bind(this.sandbox);
                     this.spy = this.sandbox.spy.bind(this.sandbox);
@@ -113,7 +102,6 @@ class TestBase {
                 });
                 afterEach(() => {
                     process.env.NODE_ENV = 'test';
-                    this.restore();
                     this.sandbox.restore();
                 });
             }
