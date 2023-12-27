@@ -11,6 +11,12 @@ router.get('/access', jwtMiddleware.checkRequestToken, (req, res, next) => {
     else res.status(200).json(req.token.user)
 });
 
-router.post('/logout', (req, res, next) => loginController.logout(req, res, next));
+router.post('/logout', async (req, res, next) => {
+    try {
+        await loginController.logout(req, res, next);
+    } catch (error) {
+        userController.sendErrorResponse(res, { status: 500, message: 'Ocorreu um erro inesperado', error });
+    }
+});
 
 export default router;
