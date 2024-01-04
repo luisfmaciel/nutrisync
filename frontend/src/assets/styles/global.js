@@ -6,7 +6,7 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: 'Encode Sans Expanded', sans-serif;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    color: #302C2B;
+    background-color: #F6F6F6;
   }
 `;

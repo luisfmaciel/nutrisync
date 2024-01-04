@@ -1,6 +1,11 @@
+import Sidebar from "./components/Sidebar";
+import { itemsMenu } from "./components/Sidebar/itemsMenu";
+
 const Dashboard = () => {
     return (
-        <h1>Dashboard</h1>
+        <>
+            <Sidebar itemsMenu={itemsMenu} />
+        </>
     )
 } 
 
