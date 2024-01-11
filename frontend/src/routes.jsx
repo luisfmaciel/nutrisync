@@ -1,4 +1,4 @@
-import Dashboard from "./Dashboard";
+import Dashboard from "./pages/Dashboard";
 import Home from "./Home";
 
 export const routes = [
