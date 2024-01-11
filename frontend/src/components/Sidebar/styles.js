@@ -3,8 +3,7 @@ import { Link as LinkR } from "react-router-dom";
 // import { FaTimes } from 'react-icons/fa';
 
 export const SidebarContainer = styled.aside`
-    position: fixed;
-    z-index: 999;
+    /* z-index: 999; */
     width: 250px;
     height: 100%;
     background-color: #ffffff;
@@ -86,7 +85,6 @@ export const Img = styled.img`
 export const SidebarFooter = styled.div`
     width: 100%;
     height: 80px;
-    background-color: #ffffff;
     bottom: 0;
     display: flex;
     justify-content: center;
@@ -94,14 +92,12 @@ export const SidebarFooter = styled.div`
 
 export const SignOutText = styled.span`
     color: #302c2b;
-    background-color: #ffffff;
     font-weight: bold;
     margin-right: 6px;
 `;
 
 export const SignOutLink = styled(LinkR)`
     color: #302c2b;
-    background-color: #ffffff;
     text-decoration: none;
     display: flex;
     align-items: center;
