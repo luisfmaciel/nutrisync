@@ -30,3 +30,10 @@ export const BoxInfoMenu = styled.div`
     height: 100%;
     border-left: 1px solid #d9d9d9;
 `;
+
+export const ListInfoMenu = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 42px;
+    background-color: transparent;
+`;

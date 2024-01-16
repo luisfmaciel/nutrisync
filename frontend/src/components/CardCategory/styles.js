@@ -31,7 +31,7 @@ export const Card = styled.div`
     padding: 14px;
     border-radius: 5px;
     cursor: pointer;
-    background: ${({ selected }) => (selected ? 'linear-gradient(106deg, rgba(251, 168, 28, 0.50) 1.82%, rgba(251, 168, 28, 0.00) 106.52%)' : 'white') };
+    background: ${({ selected }) => (selected ? 'linear-gradient(106deg, rgba(251, 168, 28, 0.50) 1.82%, rgba(251, 168, 28, 0.00) 106.52%)' : '#FFFFFF') };
     box-shadow: ${({ selected }) => (selected ? '0px 4px 8px 0px rgba(0, 0, 0, 0.25)' : null)};
 
     &:hover {

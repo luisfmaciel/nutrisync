@@ -3,7 +3,7 @@ import lunch from "../../assets/images/lunch.png";
 import snack from "../../assets/images/snack.png";
 import dinner from "../../assets/images/dinner.png";
 
-export const infoCard = [
+export const dataCard = [
     {
         image: breakfast,
         name: "breakfast",

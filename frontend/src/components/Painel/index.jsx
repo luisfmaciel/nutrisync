@@ -1,21 +1,53 @@
 import CardCategory from "../CardCategory";
 import CategotyTitle from "../CategoryTitle";
-import { BoxDashboard, BoxInfoMenu, CardContainer, PainelContainer } from "./styles";
-import { infoCard } from "./data";
+import { BoxDashboard, BoxInfoMenu, CardContainer, ListInfoMenu, PainelContainer } from "./styles";
+import { dataCard } from "./data";
 
 import { useState } from "react";
+import CardDetail from "../CardDetail";
+
+const flagCategory = 'category'
+const flagMenu = 'menu';
+const menuDetails = [
+    { 
+        selected: true,
+        name: 'Manhã Enrgética',
+        calories: '1.200 kcal',
+        proteins: '22g',
+        fibers: '8g',
+        carbohydrates: '60g',
+    },
+    { 
+        selected: false,
+        name: 'Manhã Enrgética2',
+        calories: '1.200 kcal',
+        proteins: '22g',
+        fibers: '8g',
+        carbohydrates: '60g',
+    },
+    { 
+        selected: false,
+        name: 'Manhã Enrgética3',
+        calories: '1.200 kcal',
+        proteins: '22g',
+        fibers: '8g',
+        carbohydrates: '60g',
+    },
+]
 
 const Painel = () => {
-    const [data, setData] = useState(infoCard);
+    const [infoCard, setInfoCard] = useState(dataCard);
+    const [infoMenu, setInfoMenu] = useState(menuDetails);
 
-    const handleSetData = (name) => {
-        const newInfoCard = data.map((info) => {
+    const handleSelectCard = (name, listItens, flag) => {
+        const newList = listItens.map((item) => {
             return {
-                ...info,
-                selected: info.name === name ? true : false,
+                ...item,
+                selected: item.name === name ? true : false,
             };
         });
-        setData(newInfoCard);
+        if (flag === flagCategory) setInfoCard(newList);
+        else if (flag === flagMenu) setInfoMenu(newList)
     };
 
     return (
@@ -23,17 +55,31 @@ const Painel = () => {
             <BoxDashboard>
               <CategotyTitle title={"Categorias"} />
               <CardContainer>
-                  {data.map((info) => (
+                  {infoCard.map((info) => (
                       <CardCategory
                           key={info.name}
                           image={info.image}
                           title={info.title}
                           selected={info.selected}
-                          handleSelectCard={() => handleSetData(info.name)}
+                          handleSelectCard={() => handleSelectCard(info.name, infoCard, flagCategory)}
                       />
                   ))}
               </CardContainer>
               <CategotyTitle title={"Cardápios"} />
+              <ListInfoMenu>
+                { infoMenu.map(detail => (
+                    <CardDetail  
+                        key={detail.name}
+                        selected={detail.selected}
+                        name={detail.name}
+                        calories={detail.calories}
+                        proteins={detail.proteins}
+                        fibers={detail.fibers}
+                        carbohydrates={detail.carbohydrates}
+                        handleSelectCard={() => handleSelectCard(detail.name, infoMenu, flagMenu)}
+                    />
+                )) }
+              </ListInfoMenu>
             </BoxDashboard>
             <BoxInfoMenu></BoxInfoMenu>
         </PainelContainer>
