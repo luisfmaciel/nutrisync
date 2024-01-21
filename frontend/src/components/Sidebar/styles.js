@@ -38,7 +38,6 @@ export const NavMenu = styled.ul`
     flex-direction: column;
     justify-content: space-around;
     align-items: start;
-    margin-left: 16px;
     background-color: #ffffff;
     list-style: none;
 `;

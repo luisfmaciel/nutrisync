@@ -8,28 +8,35 @@ import {
     TopbarContainer,
     Img,
     UserEmail,
-    Username
+    Username,
 } from "./styles";
-import userCircle from '../../assets/images/user-circle.svg'
+import userCircle from "../../assets/images/user-circle.svg";
+import PropTypes from "prop-types";
 
-const Topbar = () => {
+const Topbar = ({ searchBar = false }) => {
     return (
         <TopbarContainer>
-            <BoxInput>
-                <MagnifyingGlass size={24} color="#C4C4C4" back />
-                <StyledInput placeholder="Busque seus cardápios favoritos..." />
+            <BoxInput searchBar={searchBar}>
+                {searchBar && (
+                    <>
+                        <MagnifyingGlass size={24} color="#C4C4C4" back />
+                        <StyledInput placeholder="Busque seus cardápios favoritos..." />
+                    </>
+                )}
                 <BoxInfos>
                     <Infos>
-                        <Username>{'Luis Felipe Barbosa'}</Username>
-                        <UserEmail>{'luis.barbosa@al.infnet.edu.br'}</UserEmail>
+                        <Username>{"Luis Felipe Barbosa"}</Username>
+                        <UserEmail>{"luis.barbosa@al.infnet.edu.br"}</UserEmail>
                     </Infos>
-                    <Img  src={userCircle} />
+                    <Img src={userCircle} />
                 </BoxInfos>
             </BoxInput>
         </TopbarContainer>
     );
 };
 
-Topbar.propTypes = {};
+Topbar.propTypes = {
+    searchBar: PropTypes.bool,
+};
 
 export default Topbar;

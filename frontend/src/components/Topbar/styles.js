@@ -6,7 +6,7 @@ export const TopbarContainer = styled.div`
     align-items: center;
     top: 0;
     width: 100%;
-    height: 80px;
+    padding: 16px 0;
     border-bottom: 1px solid #d9d9d9;
 `;
 
@@ -15,6 +15,7 @@ export const BoxInput = styled.div`
     display: flex;
     align-items: center;
     padding: 0 68px;
+    justify-content: ${({ searchBar }) => (searchBar ? "none" : "end")};
 `;
 
 export const StyledInput = styled.input`
@@ -24,7 +25,7 @@ export const StyledInput = styled.input`
     font-size: 16px;
     outline: none;
     padding-right: 48px;
-    color: #C4C4C4;
+    color: #c4c4c4;
 `;
 
 export const BoxInfos = styled.div`
