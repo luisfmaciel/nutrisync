@@ -1,5 +1,6 @@
 import Dashboard from "./pages/Dashboard";
 import Home from "./Home";
+import NewMenu from "./pages/NewMenu";
 
 export const routes = [
     {
@@ -14,7 +15,7 @@ export const routes = [
     },
     {
         path: "/dashboard/novo-cardapio",
-        element: <Dashboard />,
+        element: <NewMenu />,
     },
     {
         path: "/dashboard/evolucao",
