@@ -3,10 +3,11 @@ import styled from "styled-components";
 export const TitleContainer = styled.div`
     width: fit-content;
     height: fit-content;
+    background-color: transparent;
 `;
 
 export const Title = styled.h1`
-    background-color: #f6f6f6;
+    background-color: transparent;
     font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
