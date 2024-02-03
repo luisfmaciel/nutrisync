@@ -6,6 +6,8 @@ import PainelNewMenu from "../../components/PainelNewMenu";
 import SpinnerDefault from "../../components/SpinnerDefault";
 import { useState } from "react";
 
+const NEW_MENU = "Novo cardápio";
+
 const NewMenu = () => {
     const [loading, setLoading] = useState(true);
 
@@ -16,7 +18,7 @@ const NewMenu = () => {
     return (
         <NewMenudContainer>
             <SpinnerDefault loading={loading} />
-            <Sidebar itemsMenu={itemsMenu} />
+            <Sidebar itemsMenu={itemsMenu} module={NEW_MENU} />
             <Wrapper>
                 <Topbar />
                 <PainelNewMenu />

@@ -1,17 +1,19 @@
-import Dashboard from "./pages/Dashboard";
 import Home from "./Home";
 import NewMenu from "./pages/NewMenu";
+import MyMenu from "./pages/MyMenu";
 
 export const routes = [
     {
         path: "/",
-        element: <Home />,   },
+        element: <Home />,
+    },
     {
-        path: "/dashboard",
-        element: <Dashboard />,   },
+        path: "/dashboard/",
+        element: <NewMenu />,
+    },
     {
         path: "/dashboard/meus-cardapios",
-        element: <Dashboard />,
+        element: <MyMenu />,
     },
     {
         path: "/dashboard/novo-cardapio",
@@ -19,15 +21,14 @@ export const routes = [
     },
     {
         path: "/dashboard/evolucao",
-        element: <Dashboard />,   },
+        element: <MyMenu />,
+    },
     {
         path: "/dashboard/calculadora-imc",
-        element: <Dashboard />,
+        element: <MyMenu />,
     },
     {
         path: "/dashboard/perfil",
-        element: <Dashboard />,   
-    }
+        element: <MyMenu />,
+    },
 ];
-
-

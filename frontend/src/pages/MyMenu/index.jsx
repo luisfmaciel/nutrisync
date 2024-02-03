@@ -6,7 +6,9 @@ import { DashboardContainer, Wrapper } from "./styles";
 import SpinnerDefault from "../../components/SpinnerDefault";
 import { useState } from "react";
 
-const Dashboard = () => {
+const MY_MENU = "Meus cardápios"
+
+const MyMenu = () => {
     const [loading, setLoading] = useState(true);
 
     setTimeout(() => {
@@ -16,7 +18,7 @@ const Dashboard = () => {
     return (
         <DashboardContainer>
             <SpinnerDefault loading={loading} />
-            <Sidebar itemsMenu={itemsMenu} />
+            <Sidebar itemsMenu={itemsMenu} module={MY_MENU} />
             <Wrapper>
                 <Topbar searchBar={true} />
                 <Painel />
@@ -25,4 +27,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default MyMenu;
