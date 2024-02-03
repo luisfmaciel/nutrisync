@@ -15,20 +15,37 @@ import {
 import logo from "../../assets/images/logo.svg";
 import PropTypes from "prop-types";
 import { SignOut } from "@phosphor-icons/react";
+import { useEffect } from "react";
+import { useState } from "react";
 
-const Sidebar = ({ itemsMenu }) => {
+const Sidebar = ({ itemsMenu, module }) => {
+    const [items, setItems] = useState(itemsMenu);
+
+    useEffect(() => {
+        setItems(
+            itemsMenu.map((item) => {
+                if (item.name === module) item.active = true;
+                else item.active = false;
+                return item;
+            })
+        );
+    }, []);
+
     return (
         <SidebarContainer>
+            {console.log(itemsMenu)}
             <ImgBox>
                 <Img src={logo} />
             </ImgBox>
             <NavigationMenu>
                 <SideDetail />
                 <NavMenu>
-                    {itemsMenu &&
-                        itemsMenu.map((item) => (
+                    {items &&
+                        items.map((item) => (
                             <NavItem key={item.name}>
-                                <NavLinks to={item.path}>{item.name}</NavLinks>
+                                <NavLinks active={item.active} to={item.path}>
+                                    {item.name}
+                                </NavLinks>
                             </NavItem>
                         ))}
                 </NavMenu>
@@ -45,6 +62,7 @@ const Sidebar = ({ itemsMenu }) => {
 
 Sidebar.propTypes = {
     itemsMenu: PropTypes.array.isRequired,
+    module: PropTypes.string.isRequired,
 };
 
 export default Sidebar;

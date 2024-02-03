@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Link as LinkR } from "react-router-dom";
-// import { FaTimes } from 'react-icons/fa';
+import { breakpoints } from '../../assets/styles/global';
+
 
 export const SidebarContainer = styled.aside`
-    /* z-index: 999; */
     width: 250px;
     height: 100%;
     background-color: #ffffff;
@@ -12,6 +12,10 @@ export const SidebarContainer = styled.aside`
     flex-direction: column;
     border-right: 1px solid #d9d9d9;
     left: 0;
+
+    @media (max-width: ${breakpoints.large}) {
+        display: none;
+    }
 `;
 
 export const NavigationMenu = styled.div`
@@ -48,8 +52,9 @@ export const NavItem = styled.li`
 
 export const NavLinks = styled(LinkR)`
     font-size: 16px;
+    font-weight: ${({ active }) => (active ? 'bold' : null)};
     background-color: #ffffff;
-    color: #c4c4c4;
+    color: ${({ active }) => (active ? '#302c2b' : '#c4c4c4')};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,11 +62,8 @@ export const NavLinks = styled(LinkR)`
     padding: 0 1rem;
     cursor: pointer;
 
-    &.active {
-        color: #302c2b;
-    }
     &:hover {
-        color: #D9D9D9;
+        color: #d9d9d9;
         font-weight: bold;
         transition: 0.3s ease-out;
     }
