@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { BoxCount, Count, InputTitle, LabelInput, BoxInput, StyledInput, NumericInputContainer } from "./styles";
 import PropTypes from 'prop-types';
+import { useEffect } from "react";
 
-const NumericInput = ({ title, label }) => {
+const NumericInput = ({ title, label, onChange = () => {} }) => {
     const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        onChange(count);
+    }, [count]);
 
     const handleIncrement = () => {
         setCount((prevCount) => parseInt(prevCount) + 1);
@@ -26,7 +31,7 @@ const NumericInput = ({ title, label }) => {
               }
         } catch {
             setCount(0);
-        }
+        } 
     };
 
     return (
@@ -53,6 +58,7 @@ const NumericInput = ({ title, label }) => {
 NumericInput.propTypes = {
     title: PropTypes.string,
     label: PropTypes.string,
+    onChange: PropTypes.func,
 }
 
 export default NumericInput;
