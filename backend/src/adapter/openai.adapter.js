@@ -27,7 +27,7 @@ class OpenaiAdapter {
         try {
             await this.createClient();
             const response = await this._openai.completions.create({
-                model: 'text-davinci-003',
+                model: 'gpt-3.5-turbo-instruct',
                 prompt,
                 max_tokens: 2048,
                 temperature: 1
