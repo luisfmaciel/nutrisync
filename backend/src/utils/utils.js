@@ -35,7 +35,7 @@ function validadePassword(password) {
     return regexSenha.test(password);
 }
 
-export default {
+export {
     getAttributeValue,
     getDescendantProp,
     generateHash,

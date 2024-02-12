@@ -23,7 +23,7 @@ class UserController extends GenericController {
             const body = getAttributeValue(req, "body", {});
 
             const errors = this.validateFields(body);
-            if (errors) throw errors;
+            if (Object.values(errors).length) throw errors;
 
             const user = await this._userSevice.createUser(body);
             

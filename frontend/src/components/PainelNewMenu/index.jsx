@@ -1,7 +1,7 @@
 import PainelContainer from "../PainelContainer";
 import CategotyTitle from "../CategoryTitle";
 import BoxInfo from "../BoxInfo";
-import { Form } from "react-bootstrap";
+import { Form, Spinner } from "react-bootstrap";
 import {
     BoxNewMenu,
     BoxAttributes,
@@ -13,6 +13,7 @@ import {
     BoxFlex,
     SectionContainer,
     BoxCategory,
+    Loading,
 } from "./styles";
 import NumericInput from "../NumericInput";
 import TextAreaInput from "../TextAreaInput";
@@ -21,20 +22,9 @@ import { useState } from "react";
 import ButtonFilled from "../ButtonFilled";
 import DetailsResultMenu from "../DetailsResultMenu";
 import { useEffect } from "react";
+import PropTypes from 'prop-types';
 
-const request = {
-    weight: "",
-    height: "",
-    age: "",
-    preference: "",
-    restriction: "",
-    goal: "",
-    goalKgs: "",
-    healthProblems: "",
-    food: "",
-};
-
-const PainelNewMenu = () => {
+const PainelNewMenu = ({ request, setRequestNewMenu, handleGenerateMenu, loading, data }) => {
     const [emagrecimento, setEmagrecimento] = useState(false);
     const [ganhoDeMassa, setGanhoDeMassa] = useState(false);
     const [manutencaoDePeso, setManutencaoDePeso] = useState(false);
@@ -48,9 +38,9 @@ const PainelNewMenu = () => {
         'Terapêutica': terapeutica,
         'Paleolítica': paleolitica
     } );
-
+    
     useEffect(() => {
-        setGoals({
+        setGoals({  
             'Emagrecimento': emagrecimento,
             'Hipertrofia': ganhoDeMassa,
             'Manutenção do peso': manutencaoDePeso,
@@ -75,11 +65,7 @@ const PainelNewMenu = () => {
     };
 
     const handleBuildRequest = (value, attribute) => {
-        if (attribute === "goal") {
-            [emagrecimento, ganhoDeMassa, manutencaoDePeso, terapeutica, paleolitica ];
-        }
-        request[attribute] = value;
-        console.log("=======>>", request);
+        setRequestNewMenu(attribute, value);
     };
 
     return (
@@ -211,23 +197,41 @@ const PainelNewMenu = () => {
                                                 <option value="Janta">Janta</option>
                                             </Form.Select>
                                         </Form.Group>
-                                        {/* <Form.Select size="sm">
-                                            <option>Café da manhã</option>
-                                            <option>Almoço</option>
-                                            <option>Lanche</option>
-                                            <option>Janta</option>
-                                        </Form.Select> */}
                                     </BoxContent>
                                 </BoxAttributes>
-                                <ButtonFilled content="Gerar cardápio" />
+                                <ButtonFilled content="Gerar cardápio" onClick={() => handleGenerateMenu(request)}/>
                             </BoxFlex>
                         </SectionContainer>
                     </BoxNewMenu>
-                    <BoxInfo content={<DetailsResultMenu />} />
+                    <BoxInfo 
+                        content={
+                            <>
+                                { loading ? (
+                                    <Loading>
+                                        <Spinner as="span" animation="border" />
+                                    </Loading>
+                                ) : (
+                                    <DetailsResultMenu 
+                                        loading={loading} 
+                                        data={data} 
+                                    />
+
+                                ) }
+                            </>
+                        } 
+                    />
                 </NewMenuContainer>
             }
         />
     );
 };
+
+PainelNewMenu.propTypes = {
+    request: PropTypes.object.isRequired, 
+    setRequestNewMenu: PropTypes.func,
+    handleGenerateMenu: PropTypes.func,
+    loading: PropTypes.bool,
+    data: PropTypes.object,
+}
 
 export default PainelNewMenu;

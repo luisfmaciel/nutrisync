@@ -13,8 +13,7 @@ export const BoxNewMenu = styled.div`
     display: flex;
     /* padding: 36px; */
     background-color: transparent;
-    
-    
+
     div:first-child {
         padding-right: 0;
     }
@@ -93,4 +92,23 @@ export const BoxCategory = styled.div`
     display: flex;
     background-color: transparent;
     flex-direction: column;
+`;
+
+
+export const Loading = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: rgba(217, 217, 217, 0.85);
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+    span {
+        background-color: transparent;
+        width: 70px;
+        height: 70px;
+        font-weight: 700;
+        color: rgba(251, 168, 28, 0.5);
+    }
 `;

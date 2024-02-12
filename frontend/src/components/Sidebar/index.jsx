@@ -33,7 +33,6 @@ const Sidebar = ({ itemsMenu, module }) => {
 
     return (
         <SidebarContainer>
-            {console.log(itemsMenu)}
             <ImgBox>
                 <Img src={logo} />
             </ImgBox>

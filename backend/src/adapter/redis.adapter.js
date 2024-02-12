@@ -6,7 +6,7 @@ class RedisAdapter {
     }
 
     async createClient() {
-        if (!this._client && process.env.NODE_ENV === 'DEV') {
+        if (!this._client) {
             const redisOptions = await this.getRedisOptions();
             this.createConnection(redisOptions);
         }

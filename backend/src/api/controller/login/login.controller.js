@@ -22,7 +22,7 @@ class LoginController extends GenericController {
             const email = getAttributeValue(req, 'body.email');
             const password = getAttributeValue(req, 'body.password', '');
 
-            let user = await this._userController.findUserByEmailWithPassword(email);
+            let user = await this._userController.findUserByEmail(email);
             if (!user) throw this._constants.USER_NOT_FOUND;
 
             const passwordMatch = await user.checkPassword(password);

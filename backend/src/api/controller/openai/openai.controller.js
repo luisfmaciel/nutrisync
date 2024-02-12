@@ -12,11 +12,12 @@ class OpenaiController extends GenericController {
 
     async buildPrompt(template, data) {
         template["food"] = getAttributeValue(data, "food", "Almoço");
-        template["weight"] = getAttributeValue(data, "weight", 0);
-        template["height"] = getAttributeValue(data, "height", 0);
+        template["weight"] = `${getAttributeValue(data, "weight", 0)}kg`;
+        template["height"] = `${getAttributeValue(data, "height", 0)}cm`;
+        template["age"] = getAttributeValue(data, "age", 0);
         template["goal"] = getAttributeValue(data, "goal", "Manter peso");
-        template["goalKgs"] = getAttributeValue(data, "goalKgs", 0);
-        template["activityLevel"] = getAttributeValue(data, "activityLevel", "Moderado");
+        template["goalKgs"] = `${getAttributeValue(data, "goalKgs", 0)}kg`;
+        template["healthProblems"] = getAttributeValue(data, "healthProblems", "Nenhum");
         template["restriction"] = getAttributeValue(data, "restriction", "Sem restrição");
         template["preference"] = getAttributeValue(data, "preference", "Sem preferência");
 
