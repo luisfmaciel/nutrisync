@@ -1,15 +1,16 @@
-import Home from "./Home";
+// import Home from "./Home";
 import NewMenu from "./pages/NewMenu";
 import MyMenu from "./pages/MyMenu";
+import Register from "./pages/Register";
 
 export const routes = [
     {
         path: "/",
-        element: <Home />,
+        element: <Register />,
     },
     {
         path: "/dashboard/",
-        element: <NewMenu />,
+        element: <MyMenu />,
     },
     {
         path: "/dashboard/meus-cardapios",
