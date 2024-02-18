@@ -8,10 +8,10 @@ router.post('/', (req, res) => loginController.login(req, res));
 
 router.get('/access', jwtMiddleware.checkRequestToken, (req, res, next) => {
     if (!req.token) res.status(401).json({ message: 'User not authorized', auth: false });
-    else res.status(200).json(req.token.user)
+    else res.status(200).json(req.token)
 });
 
-router.post('/logout', async (req, res, next) => {
+router.get('/logout', async (req, res, next) => {
     try {
         await loginController.logout(req, res, next);
     } catch (error) {

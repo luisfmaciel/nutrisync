@@ -43,7 +43,8 @@ class LoginController extends GenericController {
     async logout(req, res, next) {
         try {
             const token = getAttributeValue(req, 'headers.authorization');
-            const data = this._redisService.hdel(AUTHENTICATION_SESSIONS, token);
+            const data = await this._redisService.hdel(AUTHENTICATION_SESSIONS, token);
+            data.auth = false;
             this.sendSuccessResponse(res, this._constants.USER_SUCCESSFULLY_DELETED, data, next);
         } catch (error) {
             this.sendErrorResponse(res, error, data, next);
