@@ -32,3 +32,7 @@ export const InfoValue = styled.span`
     font-size: 12px;
     background-color: transparent;
 `;
+
+export const BoxButton = styled.div`
+    margin-top: 24px;
+`;

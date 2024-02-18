@@ -8,7 +8,8 @@ export const ButtonContainer = styled.button`
     border: none;
     cursor: pointer;
     transition: 0.3s ease-out;
-
+    width: 100%;
+    
     &:hover {
         background-color: rgba(251, 168, 28);
     }

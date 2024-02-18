@@ -17,9 +17,14 @@ import PropTypes from "prop-types";
 import { SignOut } from "@phosphor-icons/react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useRequestSignIn from "../../pages/Register/store/signIn.store";
 
 const Sidebar = ({ itemsMenu, module }) => {
     const [items, setItems] = useState(itemsMenu);
+    const signOut = useRequestSignIn((state) => state.signOut);
+    const authorized = useRequestSignIn((state) => state.authorized);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setItems(
@@ -31,9 +36,18 @@ const Sidebar = ({ itemsMenu, module }) => {
         );
     }, []);
 
+    useEffect(() => {   
+        if(!authorized) navigate("/");
+    }, [authorized])
+    
+    const handleSignOut = () => {
+        const token = localStorage.getItem('token');
+        signOut(token);
+    }
+
     return (
         <SidebarContainer>
-            <ImgBox>
+            <ImgBox>    
                 <Img src={logo} />
             </ImgBox>
             <NavigationMenu>
@@ -50,7 +64,7 @@ const Sidebar = ({ itemsMenu, module }) => {
                 </NavMenu>
             </NavigationMenu>
             <SidebarFooter>
-                <SignOutLink to={"/"}>
+                <SignOutLink onClick={() => handleSignOut()}>
                     <SignOutText>Sign out</SignOutText>
                     <SignOut size={24} />
                 </SignOutLink>

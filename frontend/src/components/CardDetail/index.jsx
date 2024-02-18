@@ -1,5 +1,5 @@
 import ButtonFilled from "../ButtonFilled";
-import { BoxInfo, CardContainer, InfoTitle, InfoValue } from "./styles";
+import { BoxButton, BoxInfo, CardContainer, InfoTitle, InfoValue } from "./styles";
 import PropTypes from "prop-types";
 
 const CardDetail = ({
@@ -36,7 +36,9 @@ const CardDetail = ({
                 <InfoTitle>Carboidratos</InfoTitle>
                 <InfoValue>{carbohydrates}</InfoValue>
             </BoxInfo>
-            <ButtonFilled content={"Detalhes"} />
+            <BoxButton>
+                <ButtonFilled content={"Detalhes"} />
+            </BoxButton>
         </CardContainer>
     );
 };
