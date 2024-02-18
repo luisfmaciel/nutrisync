@@ -1,17 +1,27 @@
 import jwt from 'jsonwebtoken';
+import redisService from '../../service/redis/redis.service.js';
+
+const AUTHENTICATION_SESSIONS = 'AUTHENTICATION_SESSIONS';
 
 class JwtMiddleware {
     constructor() {
         this._jwt = jwt;
+        this._redisService = redisService;
         this.checkRequestToken = this.checkRequestToken.bind(this);
     }
 
     async checkRequestToken(req, res, next) {
         try {
             const token = await this.getTokenFromHeader(req);
-    
-            const decoded = await this.verifyJWT(token);
-            req.token = decoded;
+            const authenticated = await this._redisService.hget(AUTHENTICATION_SESSIONS, token);
+
+            if (!authenticated) {
+                req.token = '';
+            } else {
+                const decoded = await this.verifyJWT(token);
+                req.token = decoded;
+            }
+
             next();
         } catch (error) {
             res.status(401).json({ error });

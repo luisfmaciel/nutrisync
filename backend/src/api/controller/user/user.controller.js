@@ -1,4 +1,5 @@
 import userService from "../../../service/user/user.service.js";
+import authService from "../../../service/auth/auth.service.js";
 import { getAttributeValue, validateEmail, validadePassword } from "../../../utils/utils.js";
 import constants from "./user.constants.js";
 import GenericController from "../generic.controller.js";
@@ -7,6 +8,7 @@ class UserController extends GenericController {
     constructor() {
         super();
         this._userSevice = userService;
+        this._authService = authService;
         this._constants = constants;
     }
 
@@ -21,13 +23,20 @@ class UserController extends GenericController {
     async createUser(req, res, next) {
         try {
             const body = getAttributeValue(req, "body", {});
-
+            const email = getAttributeValue(body, "email", "");
+            
             const errors = this.validateFields(body);
+            
+            const emailAlreadyExists = await this.findUserByEmail(email);
+            if (emailAlreadyExists) errors['email'] = 'User already exists';
+
             if (Object.values(errors).length) throw errors;
 
             const user = await this._userSevice.createUser(body);
             
-            this.sendSuccessResponse(res, null, user, next);
+            const token = await this._authService.login(user);
+            
+            this.sendSuccessResponse(res, null, { ...user, token }, next);
         } catch (error) {
             this.sendErrorResponse(res, error, { success: false }, next);
         }
@@ -35,11 +44,11 @@ class UserController extends GenericController {
 
     validateFields(fields) {
         const errors = {};
-        Object.keys(fields).forEach((key) => {
+        Object.keys(fields).forEach(async (key) => {
             const value = fields[key] || '';
             if (key === "email") {
                 const emailIsValid = validateEmail(value);
-                if (!emailIsValid) errors[key] = this.setMessageError(key);
+                if (!emailIsValid) errors[key] = this.setMessageError(key);    
             } else if (key === "password") {
                 const passwordIsValid = validadePassword(value);
                 if (!passwordIsValid) errors[key] = this.setMessageError(key);
