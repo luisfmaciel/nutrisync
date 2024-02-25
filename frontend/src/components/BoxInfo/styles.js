@@ -6,6 +6,7 @@ export const InfoContainer = styled.div`
     max-height: 100%;
     border-left: 1px solid #d9d9d9;
     overflow-y: auto;
+    background-color: #ffffff;
     
     @media (max-width: ${breakpoints.large}) {
         display: none;

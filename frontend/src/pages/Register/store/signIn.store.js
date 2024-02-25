@@ -26,7 +26,7 @@ const useRequestSignIn = create((set) => ({
         } finally {
             set({ loading: false });
         }
-    },
+    },  
     getAccess: async (token) => {
         try {
             set({ loading: true });
@@ -35,8 +35,8 @@ const useRequestSignIn = create((set) => ({
                     'Authorization': token,
                 },
             });
-            console.log("response", data);
-            set({ authorized: data.auth });
+            console.log("response teste", data);
+            set({ data: { ...data } || [], authorized: data.auth });
         } catch (error) {
             console.log(error.response?.data?.message || "Erro na requisição");
         } finally {

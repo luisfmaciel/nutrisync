@@ -24,7 +24,17 @@ import DetailsResultMenu from "../DetailsResultMenu";
 import { useEffect } from "react";
 import PropTypes from 'prop-types';
 
-const PainelNewMenu = ({ request, setRequestNewMenu, handleGenerateMenu, loading, data }) => {
+const PainelNewMenu = ({ 
+    request, 
+    setRequestNewMenu, 
+    handleGenerateMenu, 
+    loading, 
+    data, 
+    setMenu, 
+    clearData, 
+    saveMenu,
+    menu 
+}) => {
     const [emagrecimento, setEmagrecimento] = useState(false);
     const [ganhoDeMassa, setGanhoDeMassa] = useState(false);
     const [manutencaoDePeso, setManutencaoDePeso] = useState(false);
@@ -38,7 +48,8 @@ const PainelNewMenu = ({ request, setRequestNewMenu, handleGenerateMenu, loading
         'Terapêutica': terapeutica,
         'Paleolítica': paleolitica
     } );
-    
+    const [menuName, setMenuName] = useState('');
+
     useEffect(() => {
         setGoals({  
             'Emagrecimento': emagrecimento,
@@ -50,12 +61,16 @@ const PainelNewMenu = ({ request, setRequestNewMenu, handleGenerateMenu, loading
     }, [emagrecimento, ganhoDeMassa, manutencaoDePeso, terapeutica, paleolitica]);
     
     useEffect(() => {
-        handleBuildRequest(buildGoals(), 'goal')
+        handleBuildRequest(buildGoals(), 'goal');
     }, [goals]);
     
     useEffect(() => {
-        handleBuildRequest(food, 'food')
+        handleBuildRequest(food, 'food');
     }, [food]);
+    
+    useEffect(() => {   
+        setMenu({'nome': menuName});
+    }, [menuName]);
 
     const buildGoals = () => {
         return Object.entries(goals).reduce((list, [key, value]) => {
@@ -191,15 +206,18 @@ const PainelNewMenu = ({ request, setRequestNewMenu, handleGenerateMenu, loading
                                                 onChange={(event) => setFood(event.currentTarget.value)}
                                             >
                                                 <option defaultChecked value={''} >Selecione uma refeição</option>
-                                                <option value="Café da manhã">Café da manhã</option>
-                                                <option value="Almoço">Almoço</option>
-                                                <option value="Lanche">Lanche</option>
-                                                <option value="Janta">Janta</option>
+                                                <option value="breakfast">Café da manhã</option>
+                                                <option value="lunch">Almoço</option>
+                                                <option value="snack">Lanche</option>
+                                                <option value="dinner">Janta</option>
                                             </Form.Select>
                                         </Form.Group>
                                     </BoxContent>
                                 </BoxAttributes>
-                                <ButtonFilled content="Gerar cardápio" onClick={() => handleGenerateMenu(request)}/>
+                                <ButtonFilled content="Gerar cardápio" onClick={() => {
+                                    handleGenerateMenu(request);
+                                    setMenuName('');
+                                }}/>
                             </BoxFlex>
                         </SectionContainer>
                     </BoxNewMenu>
@@ -212,8 +230,12 @@ const PainelNewMenu = ({ request, setRequestNewMenu, handleGenerateMenu, loading
                                     </Loading>
                                 ) : (
                                     <DetailsResultMenu 
-                                        loading={loading} 
-                                        data={data} 
+                                        data={data}
+                                        menuName={menuName}
+                                        handleSetMenuName={(event) => setMenuName(event)}
+                                        clearData={clearData}
+                                        saveMenu={saveMenu}
+                                        menu={menu}
                                     />
 
                                 ) }
@@ -232,6 +254,10 @@ PainelNewMenu.propTypes = {
     handleGenerateMenu: PropTypes.func,
     loading: PropTypes.bool,
     data: PropTypes.object,
+    setMenu: PropTypes.func,
+    clearData: PropTypes.func,
+    saveMenu: PropTypes.func,
+    menu: PropTypes.object,
 }
 
 export default PainelNewMenu;

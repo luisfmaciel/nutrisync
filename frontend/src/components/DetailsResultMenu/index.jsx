@@ -12,22 +12,14 @@ import InputDefault from "../InputDefault";
 import NutrintionInformation from "../NutritionInformation";
 import PropTypes from "prop-types";
 
-// const listItems = [
-//     // { alimento: "Pão Integral", quantidade: "2 fatias" },
-//     // { alimento: "Ovos Mexidos", quantidade: "2 unidades" },
-//     // { alimento: "Abacate", quantidade: "100g" },
-//     // { alimento: "Mamão", quantidade: "150g" },
-//     // { alimento: "Café preto", quantidade: "100ml" },
-// ];
-
-// const itens = [
-//     { title: "proteínas", value: "22g" },
-//     { title: "fibras", value: "8g" },
-//     { title: "calorias", value: "800kcal" },
-//     { title: "carboidratos", value: "60g" },
-// ];
-
-const DetailsResultMenu = ({ data }) => {
+const DetailsResultMenu = ({
+    data,
+    menuName,
+    handleSetMenuName,
+    clearData,
+    saveMenu,
+    menu
+}) => {
     return (
         <DetailsContainer>
             {!data.cardapio ? (
@@ -35,7 +27,7 @@ const DetailsResultMenu = ({ data }) => {
                     <MenuTitle>Bem Vindo ao NutriSync!</MenuTitle>
                     <EmptyBox>
                         <InformationText>
-                            Estamos prontos para criar um cardápio exclusivo
+                            Estamos prontos para criar um novo cardápio exclusivo
                             para você.
                         </InformationText>
                     </EmptyBox>
@@ -45,6 +37,7 @@ const DetailsResultMenu = ({ data }) => {
                     <InputDefault
                         title={"Nome do cardápio"}
                         placeholder={"Ex.:  Café Matinal"}
+                        onChange={handleSetMenuName}
                     />
                     <MenuTitle>Sugestão de {"café da manhã"}:</MenuTitle>
                     <ListItems items={data.cardapio || []} />
@@ -54,15 +47,36 @@ const DetailsResultMenu = ({ data }) => {
                 </>
             )}
             <BoxButtons>
-                <ButtonFilled content="Salvar" />
-                <ButtonStroke content="Descartar" />
+                {console.log('manuname', menuName)}
+                <ButtonFilled
+                    content="Salvar"
+                    onClick={() => {
+                        saveMenu(menu);
+                        handleSetMenuName('');
+                        clearData();
+                    }}
+                    disabled={menuName ? false : true}
+                />
+                <ButtonStroke
+                    content="Descartar"
+                    onClick={() => {
+                        clearData();
+                        handleSetMenuName('');
+                    }}
+                    disabled={Object.values(data).length ? false : true}
+                />
             </BoxButtons>
         </DetailsContainer>
     );
 };
 
 DetailsResultMenu.propTypes = {
-    data: PropTypes.data,
+    data: PropTypes.object,
+    menuName: PropTypes.string,
+    handleSetMenuName: PropTypes.func,
+    clearData: PropTypes.func,
+    saveMenu: PropTypes.func,
+    menu: PropTypes.object,
 };
 
 export default DetailsResultMenu;

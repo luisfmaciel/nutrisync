@@ -5,6 +5,7 @@ export const DetailsContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 32px;
+    background-color: #ffffff;
 `;
 
 export const MenuTitle = styled.span`

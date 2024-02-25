@@ -1,17 +1,18 @@
 import { ButtonContainer } from "./styles";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-const ButtonFilled = ({ content, onClick }) => {
-  return (
-    <ButtonContainer onClick={onClick}>
-      { content }
-    </ButtonContainer>
-  )
-}
+const ButtonFilled = ({ content, onClick, disabled = false }) => {
+    return (
+        <ButtonContainer onClick={onClick} disabled={disabled}>
+            {content}
+        </ButtonContainer>
+    );
+};
 
 ButtonFilled.propTypes = {
-  content: PropTypes.string.isRequired,
-  onClick: PropTypes.func
-}
+    content: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
+    disabled: PropTypes.bool,
+};
 
 export default ButtonFilled;
