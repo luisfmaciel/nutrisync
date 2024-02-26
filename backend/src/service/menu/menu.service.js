@@ -16,9 +16,9 @@ class MenuService extends GenericService {
         }
     }
 
-    async updateClassificationMenu(userId, nome, classification) {
+    async updateClassificationMenu(_id, classification) {
         try {
-            return await this._menuModel.updateOne({ userId, nome }, { $set: { classification } });
+            return await this._menuModel.findOneAndUpdate({ _id }, { $set: { classification } }, { returnOriginal: false });
         } catch (error) {
             throw error;
         }
@@ -40,9 +40,9 @@ class MenuService extends GenericService {
         }
     }
 
-    async getAllMenus(userId) {
+    async getAllMenus(userId, tipo) {
         try {
-            return await this._menuModel.find({ userId });
+            return await this._menuModel.find({ userId, tipo });
         } catch (error) {
             throw error;
         }

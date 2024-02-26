@@ -5,7 +5,7 @@ const router = Router({ mergeParams: true });
 
 router.get('/', async (req, res) => {
     try {
-        await menuController.createMenu(req, res)
+        await menuController.getAllMenusByCategory(req, res)
     } catch (error) {
         menuController.sendErrorResponse(res, { status: 500, message: 'Ocorreu um erro inesperado', error });
     }

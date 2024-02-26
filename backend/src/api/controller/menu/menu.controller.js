@@ -20,11 +20,12 @@ class MenuController extends GenericController {
         }
     }
 
-    async getAllMenus(req, res, next) {
+    async getAllMenusByCategory(req, res, next) {
         try {
-            const userId = getAttributeValue(req, 'body.userId', '');
-            const data = await this._menuService.getAllMenus({ userId });
-            this.sendSuccessResponse(res, null, {...data, success: true}, next);
+            const userId = getAttributeValue(req, 'query.userId', '');    
+            const cateogry = getAttributeValue(req, 'query.category', '');
+            const data = await this._menuService.getAllMenus(userId, cateogry);
+            this.sendSuccessResponse(res, null, {menus: data, success: userId ? true : false}, next);
         } catch (error) {
             this.sendErrorResponse(res, error, { success: false }, next);
         }
@@ -44,17 +45,20 @@ class MenuController extends GenericController {
 
     async updateClassificationMenu(req, res, next) {
         try {
-            const userId = getAttributeValue(req, "body.userId", "");
-            const nome = getAttributeValue(req, "body.nome", "");
+            let menus = [];
+            const _id = getAttributeValue(req, "body._id", "");
             const classification = getAttributeValue(req, "body.classification", 0);
 
             const data = await this._menuService.updateClassificationMenu(
-                userId,
-                nome,
+                _id,
                 classification
             );
+            
+            if(data._doc) {
+                menus = await this._menuService.getAllMenus(data._doc.userId, data._doc.tipo);
+            } 
 
-            this.sendSuccessResponse(res, "Menu is updated", data, next);
+            this.sendSuccessResponse(res, "Menu is updated", { menus, classification: data.classification || 0 }, next);
         } catch (error) {
             this.sendErrorResponse(res, error, { success: false }, next);
         }
