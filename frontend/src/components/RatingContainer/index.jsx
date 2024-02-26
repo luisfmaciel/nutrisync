@@ -1,34 +1,17 @@
-import { useState } from "react";
 import { BoxRating, ValueRating } from "./styles";
 import { Rating } from "react-simple-star-rating";
 import PropTypes from "prop-types";
 
-const RatingContainer = ({ ratingMenu = 0, isDisabled = false }) => {
-    const [rating, setRating] = useState(ratingMenu);
-
-    // Catch Rating value
-    const handleRating = (rate) => {
-        setRating(rate);
-
-        // other logic
-    };
-    // Optinal callback functions
-    // const onPointerEnter = () => console.log("Enter");
-    // const onPointerLeave = () => console.log("Leave");
-    // const onPointerMove = (value, index) => console.log(value, index);
+const RatingContainer = ({ ratingMenu = 0, isDisabled = false, setRating, selectedItemId }) => {
     return (
         <BoxRating>
-            <ValueRating>{rating.toFixed(1)}</ValueRating>
+            <ValueRating>{ratingMenu.toFixed(1)}</ValueRating>
             <Rating
-                initialValue={rating}
+                initialValue={ratingMenu}
                 fillColor="#FEDC5A"
                 size={24}
-                onClick={handleRating}
+                onClick={(rate) => setRating(rate)}
                 readonly={isDisabled}
-                // onPointerEnter={onPointerEnter}
-                // onPointerLeave={onPointerLeave}
-                // onPointerMove={onPointerMove}
-                /* Available Props */
             />
         </BoxRating>
     );
@@ -36,7 +19,9 @@ const RatingContainer = ({ ratingMenu = 0, isDisabled = false }) => {
 
 RatingContainer.propTypes = {
     ratingMenu: PropTypes.number.isRequired,
-    isDisabled: PropTypes.bool
+    isDisabled: PropTypes.bool,
+    setRating: PropTypes.func,
+    selectedItemId: PropTypes.func
 }
 
 export default RatingContainer;

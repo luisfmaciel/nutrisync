@@ -37,6 +37,7 @@ const useRequestSignIn = create((set) => ({
             });
             console.log("response teste", data);
             set({ data: { ...data } || [], authorized: data.auth });
+            localStorage.setItem("userId", data.user._id);
         } catch (error) {
             console.log(error.response?.data?.message || "Erro na requisição");
         } finally {

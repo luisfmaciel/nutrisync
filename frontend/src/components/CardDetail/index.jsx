@@ -1,42 +1,28 @@
 import ButtonFilled from "../ButtonFilled";
-import { BoxButton, BoxInfo, CardContainer, InfoTitle, InfoValue } from "./styles";
+import {
+    BoxButton,
+    BoxInfo,
+    CardContainer,
+    InfoTitle,
+    InfoValue,
+} from "./styles";
 import PropTypes from "prop-types";
 
-const CardDetail = ({
-    selected,
-    name,
-    calories,
-    proteins,
-    fibers,
-    carbohydrates,
-    handleSelectCard
-}) => {
+const CardDetail = ({ selected, name, infos, handleSelectCard }) => {
     return (
-        <CardContainer 
-            selected={selected}
-            onClick={handleSelectCard}
-        >
+        <CardContainer selected={selected}>
             <BoxInfo>
                 <InfoTitle>Nome</InfoTitle>
                 <InfoValue>{name}</InfoValue>
             </BoxInfo>
-            <BoxInfo>
-                <InfoTitle>Calorias</InfoTitle>
-                <InfoValue>{calories}</InfoValue>
-            </BoxInfo>
-            <BoxInfo>
-                <InfoTitle>Proteínas</InfoTitle>
-                <InfoValue>{proteins}</InfoValue>
-            </BoxInfo>
-            <BoxInfo>
-                <InfoTitle>Fibras</InfoTitle>
-                <InfoValue>{fibers}</InfoValue>
-            </BoxInfo>
-            <BoxInfo>
-                <InfoTitle>Carboidratos</InfoTitle>
-                <InfoValue>{carbohydrates}</InfoValue>
-            </BoxInfo>
-            <BoxButton>
+            {infos.length &&
+                infos.map((info) => (
+                    <BoxInfo key={info.title}>
+                        <InfoTitle>{info.title}</InfoTitle>
+                        <InfoValue>{info.value}</InfoValue>
+                    </BoxInfo>
+                ))}
+            <BoxButton onClick={handleSelectCard}>
                 <ButtonFilled content={"Detalhes"} />
             </BoxButton>
         </CardContainer>
@@ -46,11 +32,8 @@ const CardDetail = ({
 CardDetail.propTypes = {
     selected: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
-    calories: PropTypes.string.isRequired,
-    proteins: PropTypes.string.isRequired,
-    fibers: PropTypes.string.isRequired,
-    carbohydrates: PropTypes.string.isRequired,
-    handleSelectCard: PropTypes.func.isRequired
+    infos: PropTypes.array.isRequired,
+    handleSelectCard: PropTypes.func.isRequired,
 };
 
 export default CardDetail;

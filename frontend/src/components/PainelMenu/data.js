@@ -6,25 +6,25 @@ import dinner from "../../assets/images/dinner.png";
 export const dataCard = [
     {
         image: breakfast,
-        name: "breakfast",
+        nome: "breakfast",
         title: "Café da manhã",
         selected: true,
     },
     {
         image: lunch,
-        name: "lunch",
+        nome: "lunch",
         title: "Almoço",
         selected: false,
     },
     {
         image: snack,
-        name: "snack",
+        nome: "snack",
         title: "Lanche",
         selected: false,
     },
     {
         image: dinner,
-        name: "dinner",
+        nome: "dinner",
         title: "Jantar",
         selected: false,
     },

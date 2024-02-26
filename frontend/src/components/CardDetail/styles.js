@@ -9,7 +9,6 @@ export const CardContainer = styled.div`
     border-radius: 5px;
     margin: 16px 0;
     padding: 0 38px;
-    cursor: pointer;
     background: ${({ selected }) => (selected ? 'linear-gradient(106deg, rgba(251, 168, 28, 0.50) 1.82%, rgba(251, 168, 28, 0.00) 106.52%)' : '#FFFFFF') };
 `;
 
@@ -34,5 +33,5 @@ export const InfoValue = styled.span`
 `;
 
 export const BoxButton = styled.div`
-    margin-top: 24px;
+    height: fit-content;
 `;

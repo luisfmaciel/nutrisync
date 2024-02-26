@@ -40,6 +40,7 @@ const PainelNewMenu = ({
     const [manutencaoDePeso, setManutencaoDePeso] = useState(false);
     const [terapeutica, setTerapeutica] = useState(false);
     const [paleolitica, setPaleolitica] = useState(false);
+    const [disableButton, setDisableButton] = useState(true);
     const [food, setFood] = useState('');
     const [goals, setGoals] = useState({
         'Emagrecimento': emagrecimento,
@@ -71,6 +72,13 @@ const PainelNewMenu = ({
     useEffect(() => {   
         setMenu({'nome': menuName});
     }, [menuName]);
+
+    useEffect(() => {
+        console.log('request', request);
+        if(request.height && request.weight && request.food && request.goal) {
+            setDisableButton(false);
+        }
+    }, [request])
 
     const buildGoals = () => {
         return Object.entries(goals).reduce((list, [key, value]) => {
@@ -214,10 +222,14 @@ const PainelNewMenu = ({
                                         </Form.Group>
                                     </BoxContent>
                                 </BoxAttributes>
-                                <ButtonFilled content="Gerar cardápio" onClick={() => {
-                                    handleGenerateMenu(request);
-                                    setMenuName('');
-                                }}/>
+                                <ButtonFilled 
+                                    content="Gerar cardápio" 
+                                    onClick={() => {
+                                        handleGenerateMenu(request);
+                                        setMenuName('');
+                                    }}
+                                    disabled={disableButton}
+                                />
                             </BoxFlex>
                         </SectionContainer>
                     </BoxNewMenu>

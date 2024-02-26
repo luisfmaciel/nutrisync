@@ -19,9 +19,10 @@ const useRequestSignUp = create((set) => ({
         try {
             set({ loading: true });
             const { data } = await api.post("/api/register", request);
-            // console.log("response", data.data.token);
+            console.log("response", data);
             set({ data: { ...data, sucess: true } || [], authorized: true });
             localStorage.setItem("token", data.data.token);
+            localStorage.setItem("userId", data.user._id);
         } catch (error) {
             console.log(error.response?.data?.message || "Erro na requisição");
         } finally {
