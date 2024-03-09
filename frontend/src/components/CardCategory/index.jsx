@@ -1,13 +1,16 @@
-import { Card, CardContainer, Img, TitleCard } from "./styles";
+import { BoxImg, BoxTitleCard, Card, CardContainer, Img, TitleCard } from "./styles";
 import PropTypes from "prop-types";
 
 const CardCategory = ({ image, title, selected, handleSelectCard }) => {
-
     return (
         <CardContainer onClick={handleSelectCard}>
             <Card selected={selected}>
-                <Img src={image} selected={selected} />
-                <TitleCard>{title}</TitleCard>
+                <BoxImg>
+                    <Img src={image} selected={selected} />
+                </BoxImg>
+                <BoxTitleCard>
+                    <TitleCard>{title}</TitleCard>
+                </BoxTitleCard>
             </Card>
         </CardContainer>
     );

@@ -82,7 +82,6 @@ const PainelMenu = ({
                 <>
                     <BoxDashboard>
                         <CategotyTitle title={"Categorias"} />
-                        {console.log("data", [data])}
                         <CardContainer>
                             {infoCard.map((info) => (
                                 <CardCategory

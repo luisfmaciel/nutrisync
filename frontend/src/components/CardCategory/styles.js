@@ -8,6 +8,9 @@ export const CardContainer = styled.div`
     background-color: #f6f6f6;
     margin: 0px 12px 0px 12px;
 
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
 `;
 
 export const Img = styled.img`
@@ -18,6 +21,15 @@ export const Img = styled.img`
     background-color: transparent;
     width: ${({ selected }) => (selected ? '100px' : '86px')};
     transition: width 0.3s ease;
+    
+    @media screen and (max-width: 768px) {
+        position: inherit;
+        left: 0;
+        width: 140px;
+        transform: none;
+        bottom: 0;
+        object-fit: cover;
+    }
 `;
 
 export const Card = styled.div`
@@ -38,6 +50,39 @@ export const Card = styled.div`
         ${Img} {
             width: 100px;
         }
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        height: 80px;
+        overflow: hidden;
+        padding: 0 12px;
+        justify-content: space-between;
+        align-items: center;
+        
+        &:hover {
+            ${Img} {
+                width: 180px;
+            }
+        }
+    }
+`;
+
+export const BoxImg = styled.div`
+    @media screen and (max-width: 768px) {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        width: 100%;
+    }
+    `;
+
+export const BoxTitleCard = styled.div`
+    @media screen and (max-width: 768px) {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        width: 50%;
     }
 `;
 

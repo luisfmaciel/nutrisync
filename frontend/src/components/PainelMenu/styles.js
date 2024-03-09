@@ -7,6 +7,10 @@ export const BoxDashboard = styled.div`
     flex-direction: column;
     background-color: transparent;
     padding: 62px;
+
+    @media screen and (max-width: 768px) {
+        padding: 28px;
+    }
 `;
 
 export const CardContainer = styled.div`
@@ -15,6 +19,11 @@ export const CardContainer = styled.div`
     justify-content: space-between;
     margin: 58px 0px;
     background-color: transparent;
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        margin-top: 0;
+    }
 `;
 
 export const BoxInfoMenu = styled.div`
