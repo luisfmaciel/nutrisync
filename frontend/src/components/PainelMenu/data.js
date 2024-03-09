@@ -7,7 +7,7 @@ export const dataCard = [
     {
         image: breakfast,
         nome: "breakfast",
-        title: "Café da manhã",
+        title: "Café da Manhã",
         selected: true,
     },
     {

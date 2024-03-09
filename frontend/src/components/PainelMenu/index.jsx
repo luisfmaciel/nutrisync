@@ -1,6 +1,6 @@
 import CardCategory from "../CardCategory";
 import CategotyTitle from "../CategoryTitle";
-import { BoxDashboard, CardContainer, ListInfoMenu } from "./styles";
+import { BoxDashboard, CardContainer, EmptyMenusContainer, Img, InformationText, ListInfoMenu, Loading, TitleInformationText } from "./styles";
 import { dataCard } from "./data";
 
 import { useState } from "react";
@@ -10,37 +10,50 @@ import BoxInfo from "../BoxInfo";
 import PainelContainer from "../PainelContainer";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
+import { Spinner } from "react-bootstrap";
+import emptyPlate from "../../assets/images/empty.png";
 
 const flagCategory = "category";
 const flagMenu = "menu";
 
-
-const PainelMenu = ({ onGetMenuByCategory, onSetClassificationMeunu, data, classification }) => {
+const PainelMenu = ({
+    onSetClassificationMeunu,
+    data,
+    classification,
+    deleteMenu,
+    successDeletedMenu,
+    loadingDeletedMenu,
+    setCategory,
+    category
+}) => {
     const [infoCard, setInfoCard] = useState(dataCard);
     const [infoMenu, setInfoMenu] = useState(data);
     const [selectedItem, setSelectedItem] = useState({});
 
     useEffect(() => {
-        if(infoMenu.length) {
-            setInfoMenu((prevState) => (
-                prevState.map((item) => infoMenu.indexOf(item) === 0 ? { ...item, selected: true } : item)
-            ));
-            setSelectedItem(infoMenu[0]);
-        }
-    }, [])
+        setInfoMenu(data);
+    }, [data]);
 
     useEffect(() => {
-        if(classification) {
-            let selectedId = '';
-            for(let item of infoMenu) {
-                if(item.selected) {
+        setSelectedItem({});
+    }, [successDeletedMenu, category]);
+
+    useEffect(() => {
+        if (classification) {
+            let selectedId = "";
+            for (let item of infoMenu) {
+                if (item.selected) {
                     selectedId = item._id;
                     break;
                 }
             }
-            setInfoMenu(data.map((item) => item._id === selectedId ? { ...item, selected: true } : item));
+            setInfoMenu(
+                data.map((item) =>
+                    item._id === selectedId ? { ...item, selected: true } : item
+                )
+            );
         }
-    }, [classification])
+    }, [classification]);
 
     const handleSelectCard = (name, listItens, flag) => {
         const newList = listItens.map((item) => {
@@ -49,11 +62,13 @@ const PainelMenu = ({ onGetMenuByCategory, onSetClassificationMeunu, data, class
                 selected: item.nome === name ? true : false,
             };
         });
-        if (flag === flagCategory) setInfoCard(newList);
-        else if (flag === flagMenu) {
+        if (flag === flagCategory) {
+            setInfoCard(newList);
+            setCategory(name);
+        } else if (flag === flagMenu) {
             setInfoMenu(newList);
             for (let item of newList) {
-                if(item.selected) {
+                if (item.selected) {
                     setSelectedItem(item);
                     break;
                 }
@@ -67,7 +82,7 @@ const PainelMenu = ({ onGetMenuByCategory, onSetClassificationMeunu, data, class
                 <>
                     <BoxDashboard>
                         <CategotyTitle title={"Categorias"} />
-                        {console.log('data', [data])}
+                        {console.log("data", [data])}
                         <CardContainer>
                             {infoCard.map((info) => (
                                 <CardCategory
@@ -87,7 +102,7 @@ const PainelMenu = ({ onGetMenuByCategory, onSetClassificationMeunu, data, class
                         </CardContainer>
                         <CategotyTitle title={"Cardápios"} />
                         <ListInfoMenu>
-                            {infoMenu.map((detail) => (
+                            {infoMenu.length ? infoMenu.map((detail) => (
                                 <CardDetail
                                     key={detail.id}
                                     selected={detail.selected}
@@ -101,10 +116,33 @@ const PainelMenu = ({ onGetMenuByCategory, onSetClassificationMeunu, data, class
                                         )
                                     }
                                 />
-                            ))}
+                            )) : (
+                                <EmptyMenusContainer>
+                                    <Img  src={emptyPlate} />
+                                    <TitleInformationText>Nenhum Resultado</TitleInformationText>
+                                    <InformationText>Você ainda não possui nenhum cardápio de { infoCard.find(menu => menu.selected).title } </InformationText>
+                                </EmptyMenusContainer>
+                            )}
                         </ListInfoMenu>
                     </BoxDashboard>
-                    <BoxInfo content={<DetailsMenu selectedItem={selectedItem} onSetClassificationMeunu={onSetClassificationMeunu} />} />
+                    {loadingDeletedMenu ? (
+                        <Loading>
+                            <Spinner as="span" animation="border" />
+                        </Loading>
+                    ) : (
+                        <BoxInfo
+                            loading={loadingDeletedMenu}
+                            content={
+                                <DetailsMenu
+                                    selectedItem={selectedItem}
+                                    onSetClassificationMeunu={
+                                        onSetClassificationMeunu
+                                    }
+                                    deleteMenu={deleteMenu}
+                                />
+                            }
+                        />
+                    )}
                 </>
             }
         />
@@ -112,10 +150,14 @@ const PainelMenu = ({ onGetMenuByCategory, onSetClassificationMeunu, data, class
 };
 
 PainelMenu.propTypes = {
-    onGetMenuByCategory: PropTypes.func.isRequired,
     onSetClassificationMeunu: PropTypes.func,
     data: PropTypes.object,
     classification: PropTypes.number,
-}
+    deleteMenu: PropTypes.func,
+    successDeletedMenu: PropTypes.bool,
+    loadingDeletedMenu: PropTypes.bool,
+    setCategory: PropTypes.func,
+    category: PropTypes.string,
+};
 
 export default PainelMenu;

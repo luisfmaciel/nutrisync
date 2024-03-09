@@ -10,6 +10,7 @@ export const CardContainer = styled.div`
     margin: 16px 0;
     padding: 0 38px;
     background: ${({ selected }) => (selected ? 'linear-gradient(106deg, rgba(251, 168, 28, 0.50) 1.82%, rgba(251, 168, 28, 0.00) 106.52%)' : '#FFFFFF') };
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
 `;
 
 export const BoxInfo = styled.div`

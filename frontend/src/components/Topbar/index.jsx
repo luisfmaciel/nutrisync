@@ -13,7 +13,7 @@ import {
 import userCircle from "../../assets/images/user-circle.svg";
 import PropTypes from "prop-types";
 
-const Topbar = ({ searchBar = false }) => {
+const Topbar = ({ searchBar = false, userName = "", userEmail ="" }) => {
     return (
         <TopbarContainer>
             <BoxInput searchBar={searchBar}>
@@ -25,8 +25,8 @@ const Topbar = ({ searchBar = false }) => {
                 )}
                 <BoxInfos>
                     <Infos>
-                        <Username>{"Luis Felipe Barbosa"}</Username>
-                        <UserEmail>{"luis.barbosa@al.infnet.edu.br"}</UserEmail>
+                        <Username>{userName}</Username>
+                        <UserEmail>{userEmail}</UserEmail>
                     </Infos>
                     <Img src={userCircle} />
                 </BoxInfos>
@@ -37,6 +37,8 @@ const Topbar = ({ searchBar = false }) => {
 
 Topbar.propTypes = {
     searchBar: PropTypes.bool,
+    userName: PropTypes.string,
+    userEmail: PropTypes.string,
 };
 
 export default Topbar;

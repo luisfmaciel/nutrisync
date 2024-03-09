@@ -47,7 +47,6 @@ const DetailsResultMenu = ({
                 </>
             )}
             <BoxButtons>
-                {console.log('manuname', menuName)}
                 <ButtonFilled
                     content="Salvar"
                     onClick={() => {

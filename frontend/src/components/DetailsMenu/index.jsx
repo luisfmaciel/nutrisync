@@ -1,4 +1,4 @@
-import { BoxButtons, DetailsContainer, MenuTitle } from "./styles";
+import { BoxButtons, DetailsContainer, EmptyDetailsContainer, Img, InformationText, MenuTitle, NavLinks } from "./styles";
 import ListItems from "../ListItems";
 import ButtonFilled from "../ButtonFilled";
 import ButtonStroke from "../ButtonStroke";
@@ -7,8 +7,9 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
+import menuImg from "../../assets/images/menu.png";
 
-const DetailsMenu = ({ selectedItem = {}, onSetClassificationMeunu }) => {
+const DetailsMenu = ({ selectedItem = {}, onSetClassificationMeunu, deleteMenu }) => {
     const [rating, setRating] = useState(selectedItem.classification || 0);
     const [disableButton, setDisableButton] = useState(true);
 
@@ -26,7 +27,7 @@ const DetailsMenu = ({ selectedItem = {}, onSetClassificationMeunu }) => {
 
     return (
         <DetailsContainer>
-            {Object.values(selectedItem).length && (
+            {Object.values(selectedItem).length ? (
                 <>
                     <RatingContainer
                         ratingMenu={rating}
@@ -37,7 +38,7 @@ const DetailsMenu = ({ selectedItem = {}, onSetClassificationMeunu }) => {
                     <ListItems items={selectedItem.cardapio} />
                     <BoxButtons>
                         <ButtonFilled
-                            content="Salvar"
+                            content="Atualizar"
                             onClick={() =>
                                 onSetClassificationMeunu(
                                     selectedItem._id,
@@ -46,9 +47,16 @@ const DetailsMenu = ({ selectedItem = {}, onSetClassificationMeunu }) => {
                             }
                             disabled={disableButton}
                         />
-                        <ButtonStroke content="Excluir" />
+                        <ButtonStroke content="Excluir" onClick={() => deleteMenu(selectedItem._id)} />
                     </BoxButtons>
                 </>
+            ) : (
+                <EmptyDetailsContainer>
+                    <Img src={menuImg} />
+                    <InformationText>
+                        Selecione um cardápio para ver mais detalhes ou crie um <NavLinks to={"/dashboard/novo-cardapio"} >novo cardápio</NavLinks>.
+                    </InformationText>
+                </ EmptyDetailsContainer>
             )}
         </DetailsContainer>
     );
@@ -57,6 +65,7 @@ const DetailsMenu = ({ selectedItem = {}, onSetClassificationMeunu }) => {
 DetailsMenu.propTypes = {
     selectedItem: PropTypes.object,
     onSetClassificationMeunu: PropTypes.func,
+    deleteMenu: PropTypes.func,
 };
 
 export default DetailsMenu;

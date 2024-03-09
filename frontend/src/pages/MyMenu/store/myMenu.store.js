@@ -3,9 +3,11 @@ import api from "../../../services/api";
 
 const useMyMenu = create((set) => ({
     loading: false,
+    loadingDeletedMenu: false,
     render: false,
     data: [],
     classification: undefined,
+    successDeletedMenu: false,
     setDataMenu: (data) => {
         set({ data });
     },
@@ -34,7 +36,26 @@ const useMyMenu = create((set) => ({
         } catch (error) {
             throw new Error(error.response?.data || "Erro na requisição");
         } finally {
-            set({ loading: false });
+            setTimeout(() => {
+                set({ loading: false });
+            }, 300);
+        }
+    },
+    deleteMenu: async (menuId) => {
+        let res = [];
+        try {
+            set({ loadingDeletedMenu: true, successDeletedMenu: false });
+            const { data } = await api.delete("/api/menu/delete", { params: { menuId } });
+            res = data;
+            console.log('deleted ', data);
+            // set({ successDeletedMenu: data.data.sucess });
+            // set({ });
+        } catch (error) {
+            throw new Error(error.response?.data || "Erro na requisição");
+        } finally {
+            setTimeout(() => {
+                set({ loadingDeletedMenu: false, successDeletedMenu: res.data.success });
+            }, 500);
         }
     },
 

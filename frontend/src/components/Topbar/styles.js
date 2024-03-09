@@ -29,9 +29,11 @@ export const StyledInput = styled.input`
 `;
 
 export const BoxInfos = styled.div`
+    width: 262px;
     display: flex;
     align-items: center;
     cursor: pointer;
+    justify-content: end;
 `;
 
 export const Infos = styled.div`
