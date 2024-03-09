@@ -11,11 +11,13 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SidebarMobile from "../../components/SidebarMobile";
 
 const NEW_MENU = "Novo cardápio";
 
 const NewMenu = () => {
     const [loading, setLoading] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
 
     const request = useRequestNewMenu((state) => state.request);
     const setRequestNewMenu = useRequestNewMenu(
@@ -69,6 +71,10 @@ const NewMenu = () => {
         }
     };
 
+    const handleToggle = () => {
+        setIsOpen(!isOpen);
+    };
+
     setTimeout(() => {
         setLoading(false);
     }, 2000);
@@ -79,9 +85,11 @@ const NewMenu = () => {
             <SpinnerDefault loading={loading} />
             <Sidebar itemsMenu={itemsMenu} module={NEW_MENU} />
             <Wrapper>
+                <SidebarMobile isOpen={true} onToggle={handleToggle} />
                 <Topbar
                     userName={accessData.user?.name}
                     userEmail={accessData.user?.email}
+                    onToggle={handleToggle}
                 />
                 <PainelNewMenu
                     request={request}

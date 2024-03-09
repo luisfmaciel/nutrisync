@@ -9,13 +9,14 @@ import useMyMenu from "./store/myMenu.store";
 import { useEffect } from "react";
 import useRequestSignIn from "../Register/store/signIn.store";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import SidebarMobile from "../../components/SidebarMobile";
 
 const MY_MENU = "Meus cardápios";
 
 const MyMenu = () => {
     const [loading, setLoading] = useState(true);
     const [category, setCategory] = useState("breakfast");
+    const [isOpen, setIsOpen] = useState(false);
 
     const getMenuByCategory = useMyMenu((state) => state.getMenuByCategory);
     const deleteMenu = useMyMenu((state) => state.deleteMenu);
@@ -63,13 +64,26 @@ const MyMenu = () => {
             category,
         });
     };
+
+    const handleToggle = () => {
+        console.log("HANDLE TOGGLE", isOpen);
+        setIsOpen(!isOpen);
+    };
+
     return (
         <DashboardContainer>
             <SpinnerDefault loading={loading || loadingMyMenu} />
             <Sidebar itemsMenu={itemsMenu} module={MY_MENU} />
             <Wrapper>
+                <SidebarMobile
+                    itemsMenu={itemsMenu}
+                    module={MY_MENU}
+                    isOpen={isOpen}
+                    onToggle={handleToggle}
+                />
                 <Topbar
                     searchBar={true}
+                    onToggle={handleToggle}
                     userName={accessData.user?.name}
                     userEmail={accessData.user?.email}
                 />

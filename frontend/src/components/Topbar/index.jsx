@@ -1,5 +1,5 @@
 // import PropTypes from 'prop-types'
-import { MagnifyingGlass } from "@phosphor-icons/react";
+import { List, MagnifyingGlass } from "@phosphor-icons/react";
 import {
     BoxInfos,
     BoxInput,
@@ -9,11 +9,15 @@ import {
     Img,
     UserEmail,
     Username,
+    MobileIcon,
+    ImgBoxLogo,
+    ImgLogo,
 } from "./styles";
 import userCircle from "../../assets/images/user-circle.svg";
 import PropTypes from "prop-types";
+import logo from "../../assets/images/logo.svg";
 
-const Topbar = ({ searchBar = false, userName = "", userEmail ="" }) => {
+const Topbar = ({ searchBar = false, onToggle, userName = "", userEmail = "" }) => {
     return (
         <TopbarContainer>
             <BoxInput searchBar={searchBar}>
@@ -31,6 +35,12 @@ const Topbar = ({ searchBar = false, userName = "", userEmail ="" }) => {
                     <Img src={userCircle} />
                 </BoxInfos>
             </BoxInput>
+            <ImgBoxLogo>
+                <ImgLogo src={logo} />
+            </ImgBoxLogo>
+            <MobileIcon onClick={() => onToggle()}>
+                <List size={28} />
+            </MobileIcon>
         </TopbarContainer>
     );
 };
@@ -39,6 +49,7 @@ Topbar.propTypes = {
     searchBar: PropTypes.bool,
     userName: PropTypes.string,
     userEmail: PropTypes.string,
+    onToggle: PropTypes.func.isRequired,
 };
 
 export default Topbar;

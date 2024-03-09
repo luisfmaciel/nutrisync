@@ -8,6 +8,10 @@ export const TopbarContainer = styled.div`
     width: 100%;
     padding: 16px 0;
     border-bottom: 1px solid #d9d9d9;
+
+    @media screen and (max-width: 768px) {
+        padding: 0 16px
+    }
 `;
 
 export const BoxInput = styled.div`
@@ -16,6 +20,20 @@ export const BoxInput = styled.div`
     align-items: center;
     padding: 0 68px;
     justify-content: ${({ searchBar }) => (searchBar ? "none" : "end")};
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+`;
+
+export const MobileIcon = styled.div`
+  display: none;
+
+  @media screen and (max-width: 768px) {
+    color: black;
+    display: flex;
+    cursor: pointer;
+  }
 `;
 
 export const StyledInput = styled.input`
@@ -42,6 +60,22 @@ export const Infos = styled.div`
     margin-right: 24px;
 `;
 
+export const ImgBoxLogo = styled.div`
+    width: 100%;
+    height: 80px;
+    background-color: #ffffff;
+    top: 0;
+    display: flex;
+    justify-content: start;
+
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
+`;
+
+export const ImgLogo = styled.img`
+    width: 106px;
+`;
 export const Img = styled.img`
     width: 48px;
 `;
