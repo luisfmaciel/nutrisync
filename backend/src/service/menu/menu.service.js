@@ -24,9 +24,9 @@ class MenuService extends GenericService {
         }
     }
 
-    async deleteMenu(userId, nome) {
+    async deleteMenu(menuId) {
         try {
-            return await this._menuModel.delete({ userId, nome });
+            return await this._menuModel.deleteOne({ _id: menuId });
         } catch (error) {
             throw error;
         }

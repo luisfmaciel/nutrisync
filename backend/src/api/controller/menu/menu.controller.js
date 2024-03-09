@@ -66,10 +66,9 @@ class MenuController extends GenericController {
     
     async deleteMenu(req, res, next) {
         try {
-            const userId = getAttributeValue(req, "body.userId", "");
-            const nome = getAttributeValue(req, "body.nome", "");
+            const menuId = getAttributeValue(req, "query.menuId", "");
 
-            await this._menuService.deleteMenu(userId, nome);
+            await this._menuService.deleteMenu(menuId);
 
             this.sendSuccessResponse(res, "Menu is deleted", { success: true }, next);
         } catch (error) {
