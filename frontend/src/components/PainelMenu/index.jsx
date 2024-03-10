@@ -107,6 +107,9 @@ const PainelMenu = ({
                                     selected={detail.selected}
                                     name={detail.nome}
                                     infos={detail.valoresNutricionais || []}
+                                    deleteMenu={deleteMenu}
+                                    onSetClassificationMeunu={onSetClassificationMeunu}
+                                    selectedItem={selectedItem}
                                     handleSelectCard={() =>
                                         handleSelectCard(
                                             detail.nome,

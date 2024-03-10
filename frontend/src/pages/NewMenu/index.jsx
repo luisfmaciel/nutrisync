@@ -85,7 +85,11 @@ const NewMenu = () => {
             <SpinnerDefault loading={loading} />
             <Sidebar itemsMenu={itemsMenu} module={NEW_MENU} />
             <Wrapper>
-                <SidebarMobile isOpen={true} onToggle={handleToggle} />
+                <SidebarMobile
+                    isOpen={isOpen}
+                    onToggle={handleToggle}
+                    itemsMenu={itemsMenu}
+                />
                 <Topbar
                     userName={accessData.user?.name}
                     userEmail={accessData.user?.email}

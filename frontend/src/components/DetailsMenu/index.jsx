@@ -1,4 +1,4 @@
-import { BoxButtons, DetailsContainer, EmptyDetailsContainer, Img, InformationText, MenuTitle, NavLinks } from "./styles";
+import { BoxButtons, BoxNutriInformation, DetailsContainer, EmptyDetailsContainer, Img, InformationText, MenuTitle, NavLinks } from "./styles";
 import ListItems from "../ListItems";
 import ButtonFilled from "../ButtonFilled";
 import ButtonStroke from "../ButtonStroke";
@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 import menuImg from "../../assets/images/menu.png";
+import NutrintionInformation from "../NutritionInformation";
 
 const DetailsMenu = ({ selectedItem = {}, onSetClassificationMeunu, deleteMenu }) => {
     const [rating, setRating] = useState(selectedItem.classification || 0);
@@ -36,6 +37,9 @@ const DetailsMenu = ({ selectedItem = {}, onSetClassificationMeunu, deleteMenu }
                     />
                     <MenuTitle>{selectedItem.nome}</MenuTitle>
                     <ListItems items={selectedItem.cardapio} />
+                    <BoxNutriInformation>
+                        <NutrintionInformation items={selectedItem.valoresNutricionais} />
+                    </BoxNutriInformation>
                     <BoxButtons>
                         <ButtonFilled
                             content="Atualizar"

@@ -67,7 +67,9 @@ export const EmptyMenusContainer = styled.div`
 `;
 
 export const Img = styled.img`
-    width: 15%;
+    width: 126px;
+
+
 `;
 
 export const TitleInformationText = styled.p`

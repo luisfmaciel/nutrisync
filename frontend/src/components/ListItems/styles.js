@@ -29,6 +29,10 @@ export const IngredientText = styled.span`
     font-style: normal;
     font-weight: 500;
     margin: 12px 0;
+
+    @media screen and (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
 export const Separator = styled.div`
