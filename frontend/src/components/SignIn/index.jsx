@@ -3,8 +3,18 @@ import logo from "../../assets/images/logo.svg";
 import InputDefault from "../InputDefault";
 import ButtonFilled from "../ButtonFilled";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 
 const SignIn = ({ showPassword, onShowPassword, onChangeEmail, onChangePassword, onSubmit }) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [disableButton, setdDisableButton] = useState(true);
+
+    useEffect(() => {
+        if(email && password) setdDisableButton(false);
+        else setdDisableButton(true);
+    }, [email, password]);
+
     return (
         <SignInContainer>
             <ImgBox>
@@ -18,6 +28,7 @@ const SignIn = ({ showPassword, onShowPassword, onChangeEmail, onChangePassword,
                 title={"Email"}
                 placeholder={"example@example.com"}
                 onChange={onChangeEmail}
+                setEmail={setEmail}
                 />
             <InputDefault
                 size={"lg"}
@@ -28,9 +39,10 @@ const SignIn = ({ showPassword, onShowPassword, onChangeEmail, onChangePassword,
                 onShowPassword={onShowPassword}
                 onChange={onChangePassword}
                 visible={showPassword}
+                setPassword={setPassword}
             />
             <BoxButton onClick={() => {}}>
-                <ButtonFilled content="Login" onClick={onSubmit} />
+                <ButtonFilled content="Login" onClick={onSubmit} disabled={disableButton} />
             </BoxButton>
         </SignInContainer>
     );

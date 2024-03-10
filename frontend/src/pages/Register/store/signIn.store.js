@@ -7,6 +7,7 @@ const useRequestSignIn = create((set) => ({
         password: "",
     },
     authorized: false,
+    errorSignIn: false,
     loading: false,
     data: {},
     setRequestSignIn: (newObj) => {
@@ -22,9 +23,13 @@ const useRequestSignIn = create((set) => ({
             set({ data: { ...data } || [], authorized: true });
             localStorage.setItem("token", data.data.token);
         } catch (error) {
+            set({ errorSignIn: true });
             console.log(error.response?.data?.message || "Erro na requisição");
         } finally {
-            set({ loading: false });
+            setTimeout(() => {
+                set({ loading: false });
+                set({ errorSignIn: false })
+            }, 500);
         }
     },  
     getAccess: async (token) => {

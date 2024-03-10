@@ -1,12 +1,15 @@
 import styled from "styled-components";
 
 export const SignInContainer = styled.div`
-    width: 100%;
+    width: 50%;
     height: 100%;
     display: flex;
-    padding: 200px;
     justify-content: center;
     flex-direction: column;
+
+    @media screen and (max-width: 1200px) {
+        width: 60%;
+    }
 `;
 
 export const ImgBox = styled.div`
@@ -21,7 +24,7 @@ export const ImgBox = styled.div`
 
 export const Img = styled.img`
     background-color: #ffffff;
-    width: 50%;
+    width: 156px;
 `;
 
 export const Title = styled.span`

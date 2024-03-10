@@ -4,6 +4,10 @@ export const RegisterContainer = styled.div`
     width: 100vw;
     height: 100vh;
     display: flex;
+
+    @media screen and (max-width: 1200px) {
+        flex-direction: column-reverse;
+    }
 `;
 
 export const RegisterBox = styled.div`
@@ -14,6 +18,10 @@ export const RegisterBox = styled.div`
     align-items: center;
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
+
+    @media screen and (max-width: 1200px) {
+        margin-bottom: 26px;
+    }
 `;
 
 export const RegisterBoxImg = styled.div`
@@ -49,6 +57,11 @@ export const MessageContainer = styled.div`
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
+
+    @media screen and (max-width: 1200px) {
+        padding: 0;
+        height: 200px;
+    }
 `;
 
 export const WellcomeMessage = styled.p`
@@ -76,5 +89,9 @@ export const Button = styled.button`
         border: 2px solid transparent;
         background-color: rgba(251, 168, 28, 0.5);
         /* color: #ffffff; */
+
+    }
+    @media screen and (max-width: 1200px) {
+        width: 40%;
     }
 `;

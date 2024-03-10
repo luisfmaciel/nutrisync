@@ -19,12 +19,18 @@ const InputDefault = ({
     visible = false,
     disabled,
     onShowPassword,
-    onChange
+    onChange,
+    setEmail,
+    setPassword,
+    setNome,
 }) => {
 
     const handleChange = (event) => {
         try {
             const value  = event.target.value;
+            if(title === "Email") setEmail(value);
+            else if(title === "Senha") setPassword(value);
+            else if(title === "Nome") setNome(value);
             onChange(value);
         } catch (error) {
             console.log(error);
@@ -66,7 +72,10 @@ InputDefault.propTypes = {
     type: PropTypes.string, 
     field: PropTypes.string, 
     onShowPassword: PropTypes.func, 
-    onChange: PropTypes.func, 
+    onChange: PropTypes.func,
+    setEmail: PropTypes.func,
+    setPassword: PropTypes.func,
+    setNome: PropTypes.func,
 };
 
 export default InputDefault;

@@ -14,6 +14,8 @@ import SignUp from "../../components/SignUp";
 import SpinnerDefault from "../../components/SpinnerDefault";
 import useRequestSignIn from "./store/signIn.store";
 import useRequestSignUp from "./store/signUp.store";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
     const [isSignIn, setIsSignIn] = useState(true);
@@ -29,6 +31,7 @@ const Register = () => {
     const loadingRequest = useRequestSignIn((state) => state.loading);
     const getAccess = useRequestSignIn((state) => state.getAccess);
     const authorized = useRequestSignIn((state) => state.authorized);
+    const errorSignIn = useRequestSignIn((state) => state.errorSignIn);
     // const data = useRequestSignIn((state) => state.data);
     
     const requestSignUp = useRequestSignUp((state) => state.request);
@@ -63,7 +66,14 @@ const Register = () => {
         }
         if(isSignIn) setRequestSignIn(req);
         else setRequestSignUp({ ...req, name: nameInput,  })
-    }, [nameInput, emailInput, passwordInput])
+    }, [nameInput, emailInput, passwordInput]);
+
+    useEffect(() => {
+        console.log(errorSignIn)
+        if (errorSignIn) {
+            toast.error("E-mail ou senha inválida. Tente novamente!");
+        }
+    }, [errorSignIn]);
 
     const handleSignIn = (requestSignIn) => {
         try {
@@ -83,6 +93,7 @@ const Register = () => {
 
     return (
         <RegisterContainer>
+             <ToastContainer autoClose={3000} theme="colored" />
             <SpinnerDefault loading={isLoading || loadingRequest || loadingRequestSignUp} />
             <RegisterBox>
                 {isSignIn ? (

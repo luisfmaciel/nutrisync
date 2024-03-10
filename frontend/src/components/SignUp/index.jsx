@@ -3,6 +3,8 @@ import logo from "../../assets/images/logo.svg";
 import InputDefault from "../InputDefault";
 import ButtonFilled from "../ButtonFilled";
 import PropTypes from "prop-types";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const SignUp = ({
     onChangeName,
@@ -12,6 +14,16 @@ const SignUp = ({
     onShowPassword,
     onSubmit
 }) => {
+    const [email, setEmail] = useState('');
+    const [nome, setNome] = useState('');
+    const [password, setPassword] = useState('');
+    const [disableButton, setdDisableButton] = useState(true);
+
+    useEffect(() => {
+        if(email && password && nome) setdDisableButton(false);
+        else setdDisableButton(true);
+    }, [email, password, nome]);
+
     return (
         <SignUpContainer>
             <ImgBox>
@@ -25,13 +37,15 @@ const SignUp = ({
                 title={"Nome"}
                 placeholder={"Ex.: Fulano da Silva"}
                 onChange={onChangeName}
-            />
+                setNome={setNome}
+                />
             <InputDefault
                 size={"lg"}
                 title={"Email"}
                 placeholder={"example@example.com"}
                 onChange={onChangeEmail}
-            />
+                setEmail={setEmail}
+                />
             <InputDefault
                 size={"lg"}
                 title={"Senha"}
@@ -41,9 +55,10 @@ const SignUp = ({
                 onShowPassword={onShowPassword}
                 visible={showPassword}
                 onChange={onChangePassword}
+                setPassword={setPassword}
             />
             <BoxButton>
-                <ButtonFilled content="Registrar" onClick={onSubmit}/>
+                <ButtonFilled content="Registrar" onClick={onSubmit} disabled={disableButton} />
             </BoxButton>
         </SignUpContainer>
     );
