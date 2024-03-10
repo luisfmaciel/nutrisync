@@ -7,7 +7,7 @@ export const DetailsContainer = styled.div`
     flex-direction: column;
     padding: 32px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         padding: 0;
     }
 `;
@@ -17,7 +17,7 @@ export const MenuTitle = styled.span`
     font-weight: 700;
     margin: 16px 0 50px 0;
     
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         font-size: 22px;
         margin-bottom: 32px;
     }
@@ -37,7 +37,7 @@ export const BoxButtons = styled.div`
         bottom: 0;
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         margin-top: 48px;
     }
 `;
@@ -60,7 +60,7 @@ export const InformationText = styled.p`
     font-size: 14px;
     text-align: center;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         font-size: 12px;
     }
 `;
@@ -73,7 +73,7 @@ export const NavLinks = styled(LinkR)`
 export const BoxNutriInformation = styled.div`
     display: none;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         display: flex;
     }
 `;

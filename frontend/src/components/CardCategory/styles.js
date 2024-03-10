@@ -8,7 +8,7 @@ export const CardContainer = styled.div`
     background-color: #f6f6f6;
     margin: 0px 12px 0px 12px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         width: 100%;
     }
 `;
@@ -22,7 +22,7 @@ export const Img = styled.img`
     width: ${({ selected }) => (selected ? '100px' : '86px')};
     transition: width 0.3s ease;
     
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         position: inherit;
         left: 0;
         width: 140px;
@@ -52,7 +52,7 @@ export const Card = styled.div`
         }
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         width: 100%;
         height: 80px;
         overflow: hidden;
@@ -69,7 +69,7 @@ export const Card = styled.div`
 `;
 
 export const BoxImg = styled.div`
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         display: flex;
         align-items: center;
         justify-content: start;
@@ -78,7 +78,7 @@ export const BoxImg = styled.div`
     `;
 
 export const BoxTitleCard = styled.div`
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         display: flex;
         align-items: center;
         justify-content: start;

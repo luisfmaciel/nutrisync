@@ -30,7 +30,7 @@ export const IngredientText = styled.span`
     font-weight: 500;
     margin: 12px 0;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         font-size: 14px;
     }
 `;

@@ -9,7 +9,7 @@ export const TopbarContainer = styled.div`
     padding: 16px 0;
     border-bottom: 1px solid #d9d9d9;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         padding: 0 16px
     }
 `;
@@ -21,7 +21,7 @@ export const BoxInput = styled.div`
     padding: 0 68px;
     justify-content: ${({ searchBar }) => (searchBar ? "none" : "end")};
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         display: none;
     }
 `;
@@ -29,7 +29,7 @@ export const BoxInput = styled.div`
 export const MobileIcon = styled.div`
   display: none;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1200px) {
     color: black;
     display: flex;
     cursor: pointer;
@@ -68,7 +68,7 @@ export const ImgBoxLogo = styled.div`
     display: flex;
     justify-content: start;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 1200px) {
         display: none;
     }
 `;

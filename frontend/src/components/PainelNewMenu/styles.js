@@ -5,17 +5,27 @@ export const NewMenuContainer = styled.div`
     height: 100%;
     display: flex;
     background-color: transparent;
+    
+    @media screen and (max-width: 1200px) {
+        padding: 0 28px;
+        flex-direction: column;
+        align-items: center ;
+    }
 `;
 
 export const BoxNewMenu = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
-    /* padding: 36px; */
     background-color: transparent;
-
+    
     div:first-child {
         padding-right: 0;
+    }
+    
+    @media screen and (max-width: 1200px) {
+        flex-direction: column;
+        /* padding: 28px; */
     }
 `;
 
@@ -28,6 +38,11 @@ export const BoxAttributes = styled.div`
     justify-content: space-between;
     padding: 24px !important;
     margin-top: 12px;
+
+    @media screen and (max-width: 1200px) {
+        border: 1px solid #d9d9d9;
+        flex-wrap: wrap;
+    }
 `;
 
 export const BoxContent = styled.div`
@@ -53,6 +68,10 @@ export const BoxCheckbox = styled.div`
     margin-bottom: 24px;
     flex-wrap: wrap;
     gap: 20px;
+
+    @media screen and (max-width: 1200px) {
+        flex-direction: column;
+    }
 `;
 
 export const BoxGoals = styled.div`
@@ -77,6 +96,15 @@ export const BoxFlex = styled.div`
     button {
         width: 60%;
     }
+    
+    @media screen and (max-width: 1200px) {
+        flex-direction: column;
+        align-items: center;
+        
+        button {
+            margin-bottom: 24px;
+        }
+    }
 `;
 
 export const SectionContainer = styled.div`
@@ -86,12 +114,20 @@ export const SectionContainer = styled.div`
     flex-direction: column;
     justify-content: space-around;
     background-color: transparent;
+
+    @media screen and (max-width: 1200px) {
+        padding: 0;
+    }
 `;
 
 export const BoxCategory = styled.div`
     display: flex;
     background-color: transparent;
     flex-direction: column;
+
+    @media screen and (max-width: 1200px) {
+        margin-top: 24px;
+    }
 `;
 
 
@@ -99,7 +135,7 @@ export const Loading = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgba(217, 217, 217, 0.85);
-        display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
@@ -111,4 +147,8 @@ export const Loading = styled.div`
         font-weight: 700;
         color: rgba(251, 168, 28, 0.5);
     }
+
+    @media screen and (max-width: 1200px) {
+        padding: 24px;
+    } 
 `;

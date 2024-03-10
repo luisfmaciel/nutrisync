@@ -16,7 +16,7 @@ export const CardContainer = styled.div`
             : "#FFFFFF"};
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         display: none;
     }
 `;
@@ -74,7 +74,7 @@ export const StyledAccordion = styled(Accordion)`
 
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 1200px) {
         display: none;
     }
 `;

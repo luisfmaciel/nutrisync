@@ -1,5 +1,4 @@
-import styled from "styled-components"; 
-import { breakpoints } from "../../assets/styles/global";
+import styled from "styled-components";
 
 export const InfoContainer = styled.div`
     width: 460px;
@@ -7,8 +6,13 @@ export const InfoContainer = styled.div`
     border-left: 1px solid #d9d9d9;
     overflow-y: auto;
     background-color: #ffffff;
-    
-    @media (max-width: ${breakpoints.large}) {
-        display: none;
+
+    @media screen and (max-width: 1200px) {
+        overflow-y: visible;
+        width: 100%;
+        border: 1px solid #d9d9d9;
+        display: ${({ showInfoBox }) => (showInfoBox ? "flex" : "none")};
+        justify-content: center;
+        margin-bottom: ${({ showInfoBox }) => (showInfoBox ? "32px" : 0)};
     }
 `;

@@ -143,6 +143,7 @@ const PainelMenu = ({
                                     deleteMenu={deleteMenu}
                                 />
                             }
+                            showInfoBox={false}
                         />
                     )}
                 </>

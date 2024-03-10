@@ -6,6 +6,10 @@ export const DetailsContainer = styled.div`
     flex-direction: column;
     padding: 32px;
     background-color: #ffffff;
+
+    @media screen and (max-width: 1200px) {
+        width: 100%;
+    }
 `;
 
 export const MenuTitle = styled.span`

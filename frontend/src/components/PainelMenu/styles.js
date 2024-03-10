@@ -8,7 +8,7 @@ export const BoxDashboard = styled.div`
     background-color: transparent;
     padding: 62px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         padding: 28px;
     }
 `;
@@ -20,7 +20,7 @@ export const CardContainer = styled.div`
     margin: 58px 0px;
     background-color: transparent;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         flex-direction: column;
         margin-top: 0;
     }

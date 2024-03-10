@@ -66,7 +66,6 @@ const MyMenu = () => {
     };
 
     const handleToggle = () => {
-        console.log("HANDLE TOGGLE", isOpen);
         setIsOpen(!isOpen);
     };
 

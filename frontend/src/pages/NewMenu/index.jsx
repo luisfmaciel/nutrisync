@@ -89,6 +89,7 @@ const NewMenu = () => {
                     isOpen={isOpen}
                     onToggle={handleToggle}
                     itemsMenu={itemsMenu}
+                    module={NEW_MENU}
                 />
                 <Topbar
                     userName={accessData.user?.name}
