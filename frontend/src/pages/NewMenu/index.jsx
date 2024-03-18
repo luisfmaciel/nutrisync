@@ -45,6 +45,10 @@ const NewMenu = () => {
         const token = localStorage.getItem("token");
         console.log("register", token);
         getAccess(token);
+
+        return () => {
+            clearData();
+        };
     }, []);
 
     useEffect(() => {

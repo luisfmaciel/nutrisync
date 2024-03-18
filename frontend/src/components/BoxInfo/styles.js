@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const InfoContainer = styled.div`
-    width: 460px;
+    width: 600px;
     max-height: 100%;
     border-left: 1px solid #d9d9d9;
     overflow-y: auto;

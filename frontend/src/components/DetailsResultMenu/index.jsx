@@ -39,7 +39,7 @@ const DetailsResultMenu = ({
                         placeholder={"Ex.:  Café Matinal"}
                         onChange={handleSetMenuName}
                     />
-                    <MenuTitle>Sugestão de {"café da manhã"}:</MenuTitle>
+                    <MenuTitle>Sugestão de cardápio:</MenuTitle>
                     <ListItems items={data.cardapio || []} />
                     <NutrintionInformation
                         items={data.valoresNutricionais || []}

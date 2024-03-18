@@ -38,16 +38,12 @@ const PainelNewMenu = ({
     const [emagrecimento, setEmagrecimento] = useState(false);
     const [ganhoDeMassa, setGanhoDeMassa] = useState(false);
     const [manutencaoDePeso, setManutencaoDePeso] = useState(false);
-    const [terapeutica, setTerapeutica] = useState(false);
-    const [paleolitica, setPaleolitica] = useState(false);
     const [disableButton, setDisableButton] = useState(true);
     const [food, setFood] = useState('');
     const [goals, setGoals] = useState({
         'Emagrecimento': emagrecimento,
         'Hipertrofia': ganhoDeMassa,
         'Manutenção do peso': manutencaoDePeso,
-        'Terapêutica': terapeutica,
-        'Paleolítica': paleolitica
     } );
     const [menuName, setMenuName] = useState('');
 
@@ -56,10 +52,8 @@ const PainelNewMenu = ({
             'Emagrecimento': emagrecimento,
             'Hipertrofia': ganhoDeMassa,
             'Manutenção do peso': manutencaoDePeso,
-            'Terapêutica': terapeutica,
-            'Paleolítica': paleolitica
         });
-    }, [emagrecimento, ganhoDeMassa, manutencaoDePeso, terapeutica, paleolitica]);
+    }, [emagrecimento, ganhoDeMassa, manutencaoDePeso]);
     
     useEffect(() => {
         handleBuildRequest(buildGoals(), 'goal');
@@ -175,21 +169,11 @@ const PainelNewMenu = ({
                                                 onChange={() => setManutencaoDePeso(!manutencaoDePeso)}
                                                 label={"Manutenção do peso"}
                                             />
-                                            <Checkbox
-                                                checked={terapeutica}
-                                                onChange={() =>  setTerapeutica(!terapeutica)}
-                                                label={"Terapêutica"}
-                                            />
-                                            <Checkbox
-                                                checked={paleolitica}
-                                                onChange={() => setPaleolitica(!paleolitica)}
-                                                label={"Paleolítica"}
-                                            />
                                         </BoxCheckbox>
                                         <TitleInBox>Objetivos</TitleInBox>
                                         <LineBottom />
                                         <NumericInput
-                                            label={"Informe quantos kg deseja perder ou ganhar"}
+                                            label={"Informe a meta de kgs que você deseja alcançar"}
                                             title={"Peso"}
                                             onChange={(event) => handleBuildRequest(event, "goalKgs")}
                                         />
@@ -197,7 +181,6 @@ const PainelNewMenu = ({
                                             label={"Ex.: Diabetes, Hipertensão..."}
                                             title={"Problemas de saúde"}
                                             placeholder={"Informe a(s) doenças em tratamento..."}
-                                            // disabled={true}
                                             onChange={(event) => handleBuildRequest(event, "healthProblems")}
                                         />
                                     </BoxContent>

@@ -2,6 +2,7 @@
 import NewMenu from "./pages/NewMenu";
 import MyMenu from "./pages/MyMenu";
 import Register from "./pages/Register";
+import NotFound from "./pages/NotFound";
 
 export const routes = [
     {
@@ -22,14 +23,14 @@ export const routes = [
     },
     {
         path: "/dashboard/evolucao",
-        element: <MyMenu />,
+        element: <NotFound />,
     },
     {
         path: "/dashboard/calculadora-imc",
-        element: <MyMenu />,
+        element: <NotFound />,
     },
     {
         path: "/dashboard/perfil",
-        element: <MyMenu />,
+        element: <NotFound />,
     },
 ];

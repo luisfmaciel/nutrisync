@@ -40,7 +40,7 @@ export const ListInfoMenu = styled.div`
 `;
 
 export const Loading = styled.div`
-    width: 460px;
+    width: 600px;
     height: 100%;
     background-color: rgba(217, 217, 217, 0.85);
     display: flex;
