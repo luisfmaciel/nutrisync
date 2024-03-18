@@ -42,7 +42,7 @@ class MenuService extends GenericService {
 
     async getAllMenus(userId, tipo) {
         try {
-            return await this._menuModel.find({ userId, tipo });
+            return await this._menuModel.find({ userId, tipo }).sort({ classification: -1 });
         } catch (error) {
             throw error;
         }
