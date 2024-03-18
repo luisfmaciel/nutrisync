@@ -11,15 +11,15 @@ class OpenaiController extends GenericController {
     }
 
     async buildPrompt(template, data) {
-        template["food"] = getAttributeValue(data, "food", "Almoço");
-        template["weight"] = `${getAttributeValue(data, "weight", 0)}kg`;
-        template["height"] = `${getAttributeValue(data, "height", 0)}cm`;
-        template["age"] = getAttributeValue(data, "age", 0);
-        template["goal"] = getAttributeValue(data, "goal", "Manter peso");
-        template["goalKgs"] = `${getAttributeValue(data, "goalKgs", 0)}kg`;
-        template["healthProblems"] = getAttributeValue(data, "healthProblems", "Nenhum");
-        template["restriction"] = getAttributeValue(data, "restriction", "Sem restrição");
-        template["preference"] = getAttributeValue(data, "preference", "Sem preferência");
+        template["refeicao"] = getAttributeValue(data, "food", "Almoço");
+        template["peso_kg"] = `${getAttributeValue(data, "weight", 0)}kg`;
+        template["altura_cm"] = `${getAttributeValue(data, "height", 0)}cm`;
+        template["idade"] = getAttributeValue(data, "age", 0);
+        template["tipo_dieta"] = getAttributeValue(data, "goal", "Manter peso");
+        template["peso_meta"] = `${getAttributeValue(data, "goalKgs", 0)}kg`;
+        template["problemas_saúde"] = getAttributeValue(data, "healthProblems", "Nenhum");
+        template["retricoes_alimentares"] = getAttributeValue(data, "restriction", "Sem restrição");
+        template["preferencias_alimentares"] = getAttributeValue(data, "preference", "Sem preferência");
 
         return template;
     }
@@ -31,11 +31,12 @@ class OpenaiController extends GenericController {
 
             const prompt = await this.buildPrompt(this._template, body);
             const promptString = JSON.stringify(prompt);
+            console.log(promptString);
 
             const response = await this._openaiService.runPrompt(promptString);
 
-            if (response.choices[0].text) {
-                jsonResponse = JSON.parse(response.choices[0].text);
+            if (response.choices[0].message) {
+                jsonResponse = JSON.parse(response.choices[0].message.content);
                 console.log(jsonResponse);
             } else throw new Error("Unable to get a response");
 
