@@ -26,13 +26,18 @@ class OpenaiAdapter {
     async runPrompt(prompt) {
         try {
             await this.createClient();
-            const response = await this._openai.completions.create({
-                model: 'gpt-3.5-turbo-instruct',
-                prompt,
+            const response = await this._openai.chat.completions.create({
+                model: 'gpt-4-0125-preview',
+                messages: [
+                    {
+                        role: 'system',
+                        content: prompt
+                    }
+                ],
                 max_tokens: 2048,
                 temperature: 1
             });
-            console.log('RESPONSE', response)
+            console.log('RESPONSE', response.choices[0].message.content)
             return response;
         } catch(error) {
             console.log(error)
